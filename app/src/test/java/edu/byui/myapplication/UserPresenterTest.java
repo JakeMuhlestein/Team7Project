@@ -13,4 +13,6 @@ public class UserPresenterTest {
         UserPresenter presenter = new UserPresenter();
         assert(presenter.createNewUser() != null);
     }
+
+
 }
