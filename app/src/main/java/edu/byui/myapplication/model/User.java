@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.security.KeyStore;
 
-public class User extends AppCompatActivity {
+public class User {
     int userID;
     String username;
     String password;
-    String diaplayName;
+    String displayName;
     String email;
     String phone;
     String address;
@@ -34,12 +34,12 @@ public class User extends AppCompatActivity {
         this.password = password;
     }
 
-    public String getDiaplayName() {
-        return diaplayName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setDiaplayName(String diaplayName) {
-        this.diaplayName = diaplayName;
+    public void setDisplayName(String diaplayName) {
+        this.displayName = diaplayName;
     }
 
     public String getEmail() {
