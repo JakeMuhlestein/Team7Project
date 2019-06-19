@@ -39,7 +39,7 @@ public class User {
     }
 
     public void setDisplayName(String diaplayName) {
-        this.displayName = diaplayName;
+        this.displayName = displayName;
     }
 
     public String getEmail() {
