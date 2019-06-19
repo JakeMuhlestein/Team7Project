@@ -1,8 +1,13 @@
 package edu.byui.myapplication.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity
 public class PayMethod {
+    @PrimaryKey(autoGenerate = true)
     int ID;
     String payType;
     String acctNumber;

@@ -1,6 +1,11 @@
 package edu.byui.myapplication.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Budget {
+    @PrimaryKey(autoGenerate = true)
     int ID;
     String name;
     double amount;
