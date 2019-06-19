@@ -1,4 +1,4 @@
-package edu.byui.myapplication.model;
+package edu.byui.myapplication.view;
 
 import android.os.Bundle;
 import android.widget.EditText;
