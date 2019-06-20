@@ -17,6 +17,7 @@ import edu.byui.myapplication.model.User;
 public class Login extends AppCompatActivity {
 
     public final String USER_KEY = "edu.byu.myapplication.USER_KEY";
+    public final String USER_PREFERENCES_KEY = "UserPreferences";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class Login extends AppCompatActivity {
 
         //Get the user preferences, or create if not created
         SharedPreferences sharedPreferences = getApplicationContext().
-                getSharedPreferences("UserPreferences", Context.MODE_PRIVATE);
+                getSharedPreferences(USER_PREFERENCES_KEY, Context.MODE_PRIVATE);
         //Because we need to write we create an editor of the preferences got in line 43
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
