@@ -5,14 +5,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.security.KeyStore;
 
 public class User {
-    int userID;
-    String username;
-    String password;
-    String displayName;
-    String email;
-    String phone;
-    String address;
-    String bday;
+    private int userID;
+    private String username;
+    private String password;
+    private String displayName;
+    private String email;
+    private String phone;
+    private String address;
+    private String bday;
+
+    public User() {
+
+    }
+
+    public User(String username,
+                String displayName,
+                String email,
+                String phone,
+                String address) {
+        this.username = username;
+        this.displayName = displayName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
 
     public void setUserID(int userID) {
         this.userID = userID;
@@ -39,7 +55,7 @@ public class User {
     }
 
     public void setDisplayName(String diaplayName) {
-        this.displayName = displayName;
+        this.displayName = diaplayName;
     }
 
     public String getEmail() {
