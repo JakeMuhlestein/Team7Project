@@ -1,6 +1,7 @@
 package edu.byui.myapplication.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ public class PayMethod {
     String payType;
     String acctNumber;
     double balance;
+    @Ignore
     Date expDate;
     double points;
 
@@ -46,4 +48,15 @@ public class PayMethod {
     public void addPoints(double points) {
         balance += points;
     }
+
+    public PayMethod() {
+        // hack workaround please change.
+        expDate = new Date();
+    }
+
+//    // Needs fixing! mt.
+//    @Ignore
+//    PayMethod(Date expDate) {
+//       this.expDate = expDate;
+//    }
 }

@@ -1,23 +1,37 @@
 package edu.byui.myapplication.model;
 
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.security.KeyStore;
 
+@Entity
 public class User {
+
+    @ColumnInfo(name = "ID")
+    @PrimaryKey(autoGenerate = true)
     private int userID;
     private String username;
     private String password;
+    @ColumnInfo(name = "display_name")
     private String displayName;
     private String email;
     private String phone;
     private String address;
+    @ColumnInfo(name = "birthdate")
     private String bday;
 
+    // The following @ignore needs to be here for ROOM. It's telling the database not to instantiate
+    // using this constructor.
+    @Ignore
     public User() {
 
     }
-
+    // This will be the constructor ROOM uses. If any other constructors are created that use a non
+    // primitive datatype other than String, it should include this @Ignore directive. MT.
     public User(String username,
                 String displayName,
                 String email,
@@ -30,6 +44,7 @@ public class User {
         this.address = address;
     }
 
+    public int getUserID() { return userID; }
     public void setUserID(int userID) {
         this.userID = userID;
     }
