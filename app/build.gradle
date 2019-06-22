@@ -51,8 +51,14 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
 
     // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation "androidx.room:room-guava:$room_version"
+    // removing for now. Clashing with .9999 version of RecyclerView
+    //implementation "androidx.room:room-guava:$room_version"
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+}
+
+dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:+'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
