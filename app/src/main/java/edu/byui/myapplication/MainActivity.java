@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.google.gson.Gson;
 
+import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.view.Login;
 
@@ -41,5 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
+
+//        TeamDatabase.getInstance()
     }
 }

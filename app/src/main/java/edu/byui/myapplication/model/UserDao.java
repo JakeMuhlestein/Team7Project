@@ -18,6 +18,12 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE id IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
 
+    @Query("SELECT * FROM user WHERE id  = :userId")
+    User loadUserByIds(int userId);
+
+//    @Query("SELECT * FROM user WHERE username  = :username")
+//    User loadUserByUserName(int userId);
+
     @Insert
     void insertAll(User... users);
 

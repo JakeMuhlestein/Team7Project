@@ -16,7 +16,7 @@ import androidx.room.TypeConverters;
  * class below
  *
  */
-@Database(entities = {Budget.class, PayMethod.class, Report.class, User.class, Vendor.class}, version = 1)
+@Database(entities = {Budget.class, PayMethod.class, Report.class, User.class, Vendor.class, Vehicle.class}, version = 1)
 @TypeConverters({DateTypeConverter.class})
 public abstract class TeamDatabase extends RoomDatabase {
 
