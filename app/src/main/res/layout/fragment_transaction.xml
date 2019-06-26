@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="49dp"
+        android:text="@string/transaction_title"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/coments"
+        android:layout_width="305dp"
+        android:layout_height="217dp"
+        android:layout_below="@+id/amount"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="46dp"
+        android:ems="10"
+        android:hint="@string/transaction_coments"
+        android:inputType="textLongMessage|textPersonName" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="90dp"
+        android:ems="10"
+        android:hint="@string/transaction_date"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/payMethod"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="99dp"
+        android:ems="10"
+        android:hint="@string/transaction_amount"
+        android:inputType="number" />
+
+    <Spinner
+        android:id="@+id/budget"
+        android:layout_width="270dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/date"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="66dp" />
+
+    <Spinner
+        android:id="@+id/payMethod"
+        android:layout_width="270dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/vendor"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="67dp" />
+
+    <Spinner
+        android:id="@+id/vendor"
+        android:layout_width="270dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/budget"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="65dp" />
+
+</RelativeLayout>

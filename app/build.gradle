@@ -56,9 +56,10 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
 
 dependencies {
-    implementation 'androidx.legacy:legacy-support-v4:+'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
 }

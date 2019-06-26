@@ -3,4 +3,12 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="Login_login_button">Log In</string>
     <string name="vehicle_summary">Vehicle Summary</string>
+    <string name="menu_title">Main Menu</string>
+    <string name="transaction_title">Main Menu</string>
+    <string name="transaction_date">Date</string>
+    <string name="transaction_budget">Budget Category</string>
+    <string name="transaction_vendor">Vendor</string>
+    <string name="transaction_payMethod">Payment Method</string>
+    <string name="transaction_amount">Amount</string>
+    <string name="transaction_coments">Coments</string>
 </resources>
