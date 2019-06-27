@@ -26,12 +26,12 @@ public abstract class TeamDatabase extends RoomDatabase {
     // abstract methods with 0 arguments returning a @Dao
     // for each class/entity.
     // we'll need one for each of the entities above
-    public abstract BudgetDao budgetDao();
-    public abstract PayMethodDao payMethodDao();
-    public abstract TransactionDao transactionDao();
-    public abstract UserDao userDao();
-    public abstract VehicleDao vehicleDao();
-    public abstract VendorDao vendorDao();
+    public abstract BudgetDao getBudgetDao();
+    public abstract PayMethodDao getPayMethodDao();
+    public abstract TransactionDao getTransactionDao();
+    public abstract UserDao getUserDao();
+    public abstract VehicleDao getVehicleDao();
+    public abstract VendorDao getVendorDao();
 
     // for synchronization of database creation
     private static final Object sLock = new Object();

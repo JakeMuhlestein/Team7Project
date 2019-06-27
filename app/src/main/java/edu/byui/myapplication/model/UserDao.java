@@ -21,11 +21,14 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE id  = :userId")
     User loadUserByIds(int userId);
 
-//    @Query("SELECT * FROM user WHERE username  = :username")
-//    User loadUserByUserName(int userId);
+    @Query("SELECT * FROM user WHERE username  = :username")
+    List<User> loadUserByUserame(String username);
 
     @Insert
     void insertAll(User... users);
+
+    @Insert
+    void insert(User user);
 
     @Delete
     void delete(User user);

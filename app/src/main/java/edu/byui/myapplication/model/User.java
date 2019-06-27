@@ -104,4 +104,18 @@ public class User {
     public void setBday(String bday) {
         this.bday = bday;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", bday='" + bday + '\'' +
+                '}';
+    }
 }

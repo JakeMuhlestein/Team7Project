@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.facebook.stetho.Stetho;
 import com.google.gson.Gson;
 
 import edu.byui.myapplication.model.TeamDatabase;
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
+
+        // for Stetho - Facebook's db tool
+        Stetho.initializeWithDefaults(this);
 
 //        TeamDatabase.getInstance()
     }
