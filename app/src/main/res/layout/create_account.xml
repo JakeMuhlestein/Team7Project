@@ -81,7 +81,7 @@
         android:layout_marginRight="29dp"
         android:layout_toStartOf="@+id/comfirmpassword"
         android:layout_toLeftOf="@+id/comfirmpassword"
-        android:text="@string/comfirm_password" />
+        android:text="@string/confirm_password" />
 
     <TextView
         android:id="@+id/textView6"

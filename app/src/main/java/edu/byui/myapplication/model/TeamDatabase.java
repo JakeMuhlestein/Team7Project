@@ -16,18 +16,22 @@ import androidx.room.TypeConverters;
  * class below
  *
  */
-@Database(entities = {Budget.class, PayMethod.class, Report.class, User.class, Vendor.class, Vehicle.class}, version = 1)
+@Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class, Vendor.class, Vehicle.class}, version = 1)
 @TypeConverters({DateTypeConverter.class})
 public abstract class TeamDatabase extends RoomDatabase {
 
     // This is the actual database instance.
     private static TeamDatabase INSTANCE;
 
-    // I'll need to create an abstract method with 0 arguments returning the @DAO
-    // annotated class for each model DAO. I haven't created the DAOs yet. I believe
-    // we'll need one for each of the above: Budget, PayMethod, Report, User, Vendor & and any others
-    // that haven't been added/completed yet. They will look like this however:
+    // abstract methods with 0 arguments returning a @Dao
+    // for each class/entity.
+    // we'll need one for each of the entities above
+    public abstract BudgetDao budgetDao();
+    public abstract PayMethodDao payMethodDao();
+    public abstract TransactionDao transactionDao();
     public abstract UserDao userDao();
+    public abstract VehicleDao vehicleDao();
+    public abstract VendorDao vendorDao();
 
     // for synchronization of database creation
     private static final Object sLock = new Object();

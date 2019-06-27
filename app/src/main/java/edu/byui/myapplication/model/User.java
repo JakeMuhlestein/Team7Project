@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey;
 
 import java.security.KeyStore;
 
-@Entity
+@Entity(tableName = "user")
 public class User {
 
-    @ColumnInfo(name = "ID")
+    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     private int userID;
     private String username;

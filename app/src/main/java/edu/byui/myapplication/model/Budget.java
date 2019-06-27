@@ -3,15 +3,23 @@ package edu.byui.myapplication.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "budget")
 public class Budget {
     @PrimaryKey(autoGenerate = true)
-    int ID;
+    int id;
     String name;
     double amount;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getName() {

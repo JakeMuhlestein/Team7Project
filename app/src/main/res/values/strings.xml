@@ -11,4 +11,6 @@
     <string name="transaction_payMethod">Payment Method</string>
     <string name="transaction_amount">Amount</string>
     <string name="transaction_coments">Coments</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>
