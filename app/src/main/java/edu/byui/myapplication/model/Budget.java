@@ -33,4 +33,14 @@ public class Budget {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
+
+    @Override
+    public String toString() {
+        return "Budget{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
 }

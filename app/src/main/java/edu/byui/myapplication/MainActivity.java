@@ -46,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         // for Stetho - Facebook's db tool
         Stetho.initializeWithDefaults(this);
-
-//        TeamDatabase.getInstance()
+        DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
+        
     }
+
+    //TODO: onResume needs to include a call to DataRepository's doNothing() method
 }

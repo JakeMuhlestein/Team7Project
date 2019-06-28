@@ -19,10 +19,10 @@ public interface UserDao {
     List<User> loadAllByIds(int[] userIds);
 
     @Query("SELECT * FROM user WHERE id  = :userId")
-    User loadUserByIds(int userId);
+    User loadUserById(int userId);
 
     @Query("SELECT * FROM user WHERE username  = :username")
-    List<User> loadUserByUserame(String username);
+    List<User> loadUserByUsername(String username);
 
     @Insert
     void insertAll(User... users);

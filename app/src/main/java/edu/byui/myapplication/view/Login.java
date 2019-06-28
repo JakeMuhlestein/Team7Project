@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import edu.byui.myapplication.DataRepository;
 import edu.byui.myapplication.R;
 import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
@@ -64,7 +65,8 @@ public class Login extends AppCompatActivity {
         //Save preferences
         saveSharedPrederences(jsonUser);
 
-//        //storing user in database
-//        TeamDatabase db =
+        //storing user in database
+        //DataRepository.getInstance(TeamDatabase.getInstance(this)).createAccount(user);
+//        TeamDatabase.getInstance(this).getUserDao().
     }
 }

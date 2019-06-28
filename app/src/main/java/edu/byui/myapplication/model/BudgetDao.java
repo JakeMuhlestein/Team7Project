@@ -15,7 +15,7 @@ public interface BudgetDao {
     //@Query("UPDATE budget SET name = :budgetName, amount = :budgetAmount WHERE id = :id")
     // Simply pass it the updated Budget object
     @Update
-    public void updateCategory(Budget budget);
+    public int updateCategory(Budget budget);
 
     @Update
     public void updateCategories(List<Budget> budgets);
@@ -24,8 +24,8 @@ public interface BudgetDao {
     @Query("SELECT * FROM budget")
     public List<Budget> getAllCategories();
 
-//    @Query("SELECT * FROM budget WHERE id = :id")
-//    public Budget getCategory(int id);
+    @Query("SELECT * FROM budget WHERE name = :name")
+    public Budget getCategoryByName(String name);
 
     /**
      * perhaps this conflict strategy should be abort?
