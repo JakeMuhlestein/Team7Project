@@ -11,4 +11,14 @@
     <string name="transaction_payMethod">Payment Method</string>
     <string name="transaction_amount">Amount</string>
     <string name="transaction_coments">Coments</string>
+
+    <string-array name="rewardsCC">
+        <item>Mastercard</item>
+        <item>visa</item>
+        <item>Discover</item>
+    </string-array>
+    <string name="rewardsCC">Rewards CC</string>
+    <string name="rewardsPoints">Reward Points</string>
+    <string name="points">Enter Points</string>
+    <string name="addRemove">Add/Remove Points</string>
 </resources>
