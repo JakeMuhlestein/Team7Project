@@ -1,31 +1,64 @@
 package edu.byui.myapplication.model;
 
-import java.util.Date;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
+import java.sql.Date;
+
+@Entity (foreignKeys = {
+            @ForeignKey(
+                    entity = User.class,
+                    parentColumns = "id",
+                    childColumns = "user_id",
+                    onDelete = ForeignKey.NO_ACTION
+            ),
+            @ForeignKey(
+                    entity = Vendor.class,
+                    parentColumns = "id",
+                    childColumns = "vendor_id",
+                    onDelete = ForeignKey.NO_ACTION
+            ),
+            @ForeignKey(
+                    entity = PayMethod.class,
+                    parentColumns = "id",
+                    childColumns = "paymethod_id",
+                    onDelete = ForeignKey.NO_ACTION
+            ),
+            @ForeignKey(
+                    entity = Budget.class,
+                    parentColumns = "id",
+                    childColumns = "budget_id",
+                    onDelete = ForeignKey.NO_ACTION
+            )
+        },
+        indices = {
+            @Index("user_id"), @Index("vendor_id"), @Index("paymethod_id"), @Index("budget_id")
+        })
 public class Transaction {
+    @PrimaryKey(autoGenerate = true)
     private int id;
-    private User user;
+    @ColumnInfo(name = "user_id")
+    private int userId;
     private Date date;
-    private Vendor vendor;
-    private PayMethod payMethod;
-    private Budget budget;
+    @ColumnInfo(name = "vendor_id")
+    private int vendorId;
+    @ColumnInfo(name = "paymethod_id")
+    private int payMethodId;
+    @ColumnInfo(name = "budget_id")
+    private int budgetId;
     private double amount;
     private String notes;
 
-    public Transaction(int id,
-                       User user,
-                       Date date,
-                       Vendor vendor,
-                       PayMethod payMethod,
-                       Budget budget,
-                       double amount,
-                       String notes) {
-        this.id = id;
-        this.user = user;
+
+    public Transaction(int userId, Date date, int vendorId, int payMethodId, int budgetId, double amount, String notes) {
+        this.userId = userId;
         this.date = date;
-        this.vendor = vendor;
-        this.payMethod = payMethod;
-        this.budget = budget;
+        this.vendorId = vendorId;
+        this.payMethodId = payMethodId;
+        this.budgetId = budgetId;
         this.amount = amount;
         this.notes = notes;
     }
@@ -38,12 +71,36 @@ public class Transaction {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getVendorId() {
+        return vendorId;
+    }
+
+    public void setVendorId(int vendorId) {
+        this.vendorId = vendorId;
+    }
+
+    public int getPayMethodId() {
+        return payMethodId;
+    }
+
+    public void setPayMethodId(int payMethodId) {
+        this.payMethodId = payMethodId;
+    }
+
+    public int getBudgetId() {
+        return budgetId;
+    }
+
+    public void setBudgetId(int budgetId) {
+        this.budgetId = budgetId;
     }
 
     public Date getDate() {
@@ -54,29 +111,6 @@ public class Transaction {
         this.date = date;
     }
 
-    public Vendor getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
-
-    public PayMethod getPayMethod() {
-        return payMethod;
-    }
-
-    public void setPayMethod(PayMethod payMethod) {
-        this.payMethod = payMethod;
-    }
-
-    public Budget getBudget() {
-        return budget;
-    }
-
-    public void setBudget(Budget budget) {
-        this.budget = budget;
-    }
 
     public double getAmount() {
         return amount;
@@ -98,11 +132,11 @@ public class Transaction {
     public String toString() {
         return "Transaction{" +
                 "id=" + id +
-                ", user=" + user +
+                ", userId=" + userId +
                 ", date=" + date +
-                ", vendor=" + vendor +
-                ", payMethod=" + payMethod +
-                ", budget=" + budget +
+                ", vendorId=" + vendorId +
+                ", payMethodId=" + payMethodId +
+                ", budgetId=" + budgetId +
                 ", amount=" + amount +
                 ", notes='" + notes + '\'' +
                 '}';

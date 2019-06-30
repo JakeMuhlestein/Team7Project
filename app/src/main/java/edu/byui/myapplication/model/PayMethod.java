@@ -1,24 +1,27 @@
 package edu.byui.myapplication.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
+import java.sql.Date;
 
-@Entity
+@Entity(tableName = "paymethod")
 public class PayMethod {
     @PrimaryKey(autoGenerate = true)
-    int ID;
+    int id;
+    @ColumnInfo(name = "pay_type")
     String payType;
+    @ColumnInfo(name = "acct_number")
     String acctNumber;
     double balance;
     @Ignore
     Date expDate;
     double points;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public String getPayType() {
@@ -51,7 +54,7 @@ public class PayMethod {
 
     public PayMethod() {
         // hack workaround please change.
-        expDate = new Date();
+        //expDate = new Date(2006, 6, 14);
     }
 
 //    // Needs fixing! mt.

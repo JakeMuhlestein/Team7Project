@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey;
 
 import java.security.KeyStore;
 
-@Entity
+@Entity(tableName = "user")
 public class User {
 
-    @ColumnInfo(name = "ID")
+    @ColumnInfo(name = "id")
     @PrimaryKey(autoGenerate = true)
     private int userID;
     private String username;
@@ -103,5 +103,19 @@ public class User {
 
     public void setBday(String bday) {
         this.bday = bday;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userID=" + userID +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", bday='" + bday + '\'' +
+                '}';
     }
 }

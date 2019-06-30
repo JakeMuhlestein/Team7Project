@@ -7,16 +7,21 @@ import androidx.room.PrimaryKey;
 public class Vendor {
 
     @PrimaryKey(autoGenerate = true)
-    int ID;
-    String name;
+    private int id;
+    private String name;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
