@@ -3,17 +3,21 @@ package edu.byui.myapplication;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 
 import edu.byui.myapplication.model.Budget;
+import edu.byui.myapplication.model.BudgetDao;
 import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
+import edu.byui.myapplication.presenter.UserPresenter;
 
 public class DataRepository {
+    final String TAG = "DataRepository: ";
     private static DataRepository instance;
     private User user;
     private final TeamDatabase db;
@@ -61,13 +65,20 @@ public class DataRepository {
 
     //USER
     /**
-     * Creates an account.
+     * Creates an account. This can't be run on the main thread as is.
      * @param user
      * @return User newly persisted to the database with ID and all.
      */
     public User createAccount(User user) {
-        db.getUserDao().insert(user);
-        return db.getUserDao().loadUserByUsername(user.getUsername()).get(0);
+        //asynctask code
+        AsyncTask task = new createAccountAsyncTask(db.getUserDao()).execute(user);
+        Log.d(TAG, task.getStatus().toString());
+        // currently returning the passed in user as we don't have an observer to notify
+        // when this is done. >,<
+        return user;
+
+//        db.getUserDao().insert(user);
+//        return db.getUserDao().loadUserByUsername(user.getUsername()).get(0);
     }
 
     //BUDGET
@@ -82,6 +93,8 @@ public class DataRepository {
         return db.getBudgetDao().getCategoryByName(budget.getName());
     }
 
+
+
     /**
      * Updates a budget/category
      * @param category
@@ -94,25 +107,79 @@ public class DataRepository {
     /**
      * Inner class to run tasks in the background.
      * still working on this. Haven't decided how to go.
+     * Parameters are the types for: input for doInBackGround; progress; what we expect back
      */
-    private static class insertAsyncTask extends AsyncTask<User, Void, Void> {
+    private static class createAccountAsyncTask extends AsyncTask<User, Void, User> {
 
         private UserDao mAsyncTaskDao;
 
-        insertAsyncTask(UserDao dao) {
+        //Constructor needs the Dao passed in as it is static.
+        createAccountAsyncTask(UserDao dao) {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Void doInBackground(final User... params) {
+        protected User doInBackground(final User... params) {
             mAsyncTaskDao.insert(params[0]);
-            return null;
+            return mAsyncTaskDao.loadUserByUsername(params[0].getUsername()).get(0);
+        }
+
+        @Override
+        protected void onPostExecute(User user) {
+            super.onPostExecute(user);
+            // need to return this user.
+            // We normally would do this by notifying the presenter class.
+            // This is a UserPresenter extends ViewModel. Look into that.
+            //UserPresenter presenter = new UserPresenter().notify();
+
         }
     }
 
     /**
-     * This is a static, non-async task thread executor inner class.
-     * still working on it.
+     * Inner class to run tasks in the background.
+     * still working on this. Haven't decided how to go.
+     * Parameters are the types for: input for doInBackGround; progress; what we expect back
+     */
+    private static class createBudgetAsyncTask extends AsyncTask<Budget, Void, Budget> {
+
+        private BudgetDao mAsyncTaskDao;
+
+        //Constructor needs the Dao passed in as it is static.
+        createBudgetAsyncTask(BudgetDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Budget doInBackground(final Budget... params) {
+            mAsyncTaskDao.insertCategory(params[0]);
+            return mAsyncTaskDao.getCategoryByName(params[0].getName());
+        }
+    }
+
+    /**
+     * Inner class to run tasks in the background.
+     * still working on this. Haven't decided how to go.
+     * Parameters are the types for: input for doInBackGround; progress; what we expect back
+     */
+    private static class UpdateCategoryAsyncTask extends AsyncTask<Budget, Void, Boolean> {
+
+        private BudgetDao mAsyncTaskDao;
+
+        //Constructor needs the Dao passed in as it is static.
+        UpdateCategoryAsyncTask(BudgetDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Boolean doInBackground(final Budget... params) {
+            mAsyncTaskDao.insertCategory(params[0]);
+            return (mAsyncTaskDao.updateCategory(params[0]) == 1);
+        }
+    }
+
+    /**
+     * This is a static, non-async task thread executor inner class option.
+     * We can either do threads
      */
     private static class MainThreadExecutor implements Executor {
         private Handler mainThreadHandler = new Handler(Looper.getMainLooper());

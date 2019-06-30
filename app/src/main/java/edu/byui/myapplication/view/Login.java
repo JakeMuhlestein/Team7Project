@@ -66,7 +66,7 @@ public class Login extends AppCompatActivity {
         saveSharedPrederences(jsonUser);
 
         //storing user in database
-        //DataRepository.getInstance(TeamDatabase.getInstance(this)).createAccount(user);
+        DataRepository.getInstance(TeamDatabase.getInstance(this)).createAccount(user);
 //        TeamDatabase.getInstance(this).getUserDao().
     }
 }

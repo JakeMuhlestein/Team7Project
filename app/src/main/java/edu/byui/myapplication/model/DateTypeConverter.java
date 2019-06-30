@@ -10,12 +10,13 @@ import java.sql.Date;
 public class DateTypeConverter {
 
     @TypeConverter
-    public static Date toDate(Long value) {
-        return value == null ? null : new Date(value);
+    public static Date toDate(Long timestamp) {
+        return timestamp == null ? null : new Date(timestamp);
     }
 
     @TypeConverter
-    public static Long toLong(Date value) {
-        return value == null ? null : value.getTime();
+    public static Long toTimestamp(Date date) {
+
+        return date == null ? null : date.getTime();
     }
 }
