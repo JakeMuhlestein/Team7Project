@@ -6,7 +6,9 @@ import android.os.Looper;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 
+import java.util.List;
 import java.util.concurrent.Executor;
 
 import edu.byui.myapplication.model.Budget;
@@ -82,7 +84,6 @@ public class DataRepository {
     }
 
     //BUDGET
-
     /**
      * Creates a budget, returns the completed Budget with ID
      * @param budget
@@ -94,7 +95,6 @@ public class DataRepository {
     }
 
 
-
     /**
      * Updates a budget/category
      * @param category
@@ -102,6 +102,14 @@ public class DataRepository {
      */
     public boolean updateCategory(Budget category) {
         return (db.getBudgetDao().updateCategory(category) == 1);
+    }
+
+    /**
+     * Get All Categories
+     * Uses LiveData to return a List of all categories/budgets
+     */
+    public LiveData<List<Budget>> getAllCategories() {
+        return db.getBudgetDao().getAllCategories();
     }
 
     /**

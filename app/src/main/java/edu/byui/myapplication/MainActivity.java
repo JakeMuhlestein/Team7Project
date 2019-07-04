@@ -87,10 +87,11 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, Login.class);
         startActivity(intent);
+        */
 
         // for Stetho - Facebook's db tool
         Stetho.initializeWithDefaults(this);
-        DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();*/
+        DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
         
     }
 

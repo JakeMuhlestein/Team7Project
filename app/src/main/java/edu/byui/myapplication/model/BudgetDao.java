@@ -1,5 +1,6 @@
 package edu.byui.myapplication.model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -22,7 +23,7 @@ public interface BudgetDao {
 
     //We're probably going to need another column called "active" or something
     @Query("SELECT * FROM budget")
-    public List<Budget> getAllCategories();
+    public LiveData<List<Budget>> getAllCategories();
 
     @Query("SELECT * FROM budget WHERE name = :name")
     public Budget getCategoryByName(String name);

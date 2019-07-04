@@ -4,6 +4,7 @@ package edu.byui.myapplication;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -15,6 +16,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.byui.myapplication.model.Budget;
@@ -72,4 +74,43 @@ public class DatabaseTester {
         assert(anotherBudget.getId() != 0);
 
     }
+
+    @Test
+    public void createCategoriesAndRetrieve() throws Exception {
+        Budget budget = new Budget();
+        budget.setName("500 Dollar Budget");
+        budget.setAmount(500.00);
+        Log.d(TAG, "createCategoriesAndRetrieve: Creating 500 Dollar Budget");
+        budgetDao.insertCategory(budget);
+        // creating another
+        Budget anotherBudget = new Budget();
+        anotherBudget.setName("900 Euro Budget");
+        anotherBudget.setAmount(900.00);
+        Log.d(TAG, "createCategoriesAndRetrieve: Creating 900 Euro Budget");
+        budgetDao.insertCategory(anotherBudget);
+        // now retrieve all budgets
+        Log.d(TAG, "createCategoriesAndRetrieve: Getting all budgets from database through getAllCategories.");
+        LiveData<List<Budget>> collectionOfBudgets = budgetDao.getAllCategories();
+        List<Budget> budgets = collectionOfBudgets.getValue();
+        // Let's see what we can do with the LiveData on the testing end.
+        if (budgets != null) {
+            Log.d(TAG, "createCategoriesAndRetrieve: checking size is greater than 1:" + budgets.size()); // .getValue().size());
+//            assert (collectionOfBudgets.getValue().size() > 1);
+            assert (budgets.size() > 1);
+            // print out budgets.
+            int i = 0;
+            for (Budget b : budgets) {
+                Log.d(TAG, "Collection of Budgets #:" + i++ + ": " + b.toString());
+                assert (b.getId() > 0);
+            }
+        } else {
+            Log.d(TAG, "createCategoriesAndRetrieve: LiveData collectionOfBudgets is null.");
+            fail();
+        }
+
+        Log.d(TAG, "createCategoriesAndRetrieve: Finished createCategoriesAndRetrieve:" + anotherBudget.toString());
+
+
+    }
+
 }
