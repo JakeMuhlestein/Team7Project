@@ -10,16 +10,16 @@ public class Vendor {
     private int id;
     private String name;
 
-    public int getId() {
-        return id;
+    public Vendor(String name) {
+        this.name = name;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public int getId() {
+        return id;
     }
 
     public String getName() {

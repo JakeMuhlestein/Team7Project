@@ -49,6 +49,19 @@ dependencies {
 
 }
 
+//LIFECYCLE
+dependencies {
+    def lifecycle_version = "2.2.0-alpha02"
+
+    // ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    // For Kotlin use kapt instead of annotationProcessor
+
+}
+
+//room
 dependencies {
     def room_version = "2.1.0"
 
@@ -67,6 +80,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     // Stetho - Facebooks's debug tool
     implementation 'com.facebook.stetho:stetho:1.5.1'
+    implementation 'com.google.android.material:material:1.0.0'
 }
 
 dependencies {
