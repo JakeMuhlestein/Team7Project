@@ -100,9 +100,9 @@ public class DataRepository {
      * @param category
      * @return true if 1 budget was updated.
      */
-    public boolean updateCategory(Budget category) {
+    /*public boolean updateCategory(Budget category) {
         return (db.getBudgetDao().updateCategory(category) == 1);
-    }
+    }*/
 
     /**
      * Get All Categories
@@ -169,21 +169,21 @@ public class DataRepository {
      * still working on this. Haven't decided how to go.
      * Parameters are the types for: input for doInBackGround; progress; what we expect back
      */
-    private static class UpdateCategoryAsyncTask extends AsyncTask<Budget, Void, Boolean> {
-
-        private BudgetDao mAsyncTaskDao;
-
-        //Constructor needs the Dao passed in as it is static.
-        UpdateCategoryAsyncTask(BudgetDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Boolean doInBackground(final Budget... params) {
-            mAsyncTaskDao.insertCategory(params[0]);
-            return (mAsyncTaskDao.updateCategory(params[0]) == 1);
-        }
-    }
+    //private static class UpdateCategoryAsyncTask extends AsyncTask<Budget, Void, Boolean> {
+    //
+    //    private BudgetDao mAsyncTaskDao;
+    //
+    //    //Constructor needs the Dao passed in as it is static.
+    //    UpdateCategoryAsyncTask(BudgetDao dao) {
+    //        mAsyncTaskDao = dao;
+    //    }
+    //
+    //    @Override
+    //    protected Boolean doInBackground(final Budget... params) {
+    //        mAsyncTaskDao.insertCategory(params[0]);
+    //        return (mAsyncTaskDao.updateCategory(params[0]) == 1);
+    //    }
+    //}
 
     /**
      * This is a static, non-async task thread executor inner class option.

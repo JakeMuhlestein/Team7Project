@@ -26,6 +26,7 @@ public abstract class TeamDatabase extends RoomDatabase {
     // abstract methods with 0 arguments returning a @Dao
     // for each class/entity.
     // we'll need one for each of the entities above
+    public abstract BudgetDao budgetDao();
     public abstract BudgetDao getBudgetDao();
     public abstract PayMethodDao getPayMethodDao();
     public abstract TransactionDao getTransactionDao();

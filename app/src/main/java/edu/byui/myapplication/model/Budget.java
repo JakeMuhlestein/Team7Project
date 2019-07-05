@@ -6,20 +6,29 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "budget")
 public class Budget {
     @PrimaryKey(autoGenerate = true)
-    int id;
-    String name;
-    double amount;
+    private int id;
+    private String name;
+    private double amount;
 
-    public int getId() {
-        return id;
+    public Budget(String name, double amount) {
+        this.name = name;
+        this.amount = amount;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Budget() {
+
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -30,10 +39,9 @@ public class Budget {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setId(int id) {
+        this.id = id;
     }
-
 
     @Override
     public String toString() {
