@@ -1,11 +1,11 @@
 package edu.byui.myapplication.model;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import java.sql.Date;
 
-@Entity
+@Entity(tableName = "vehicle")
 public class Vehicle extends Budget {
 // I don't know if we can extend budget properly with Room. I will need to research this.
 //    @PrimaryKey(autoGenerate = true)
@@ -18,12 +18,18 @@ public class Vehicle extends Budget {
     private Date year;
     private int miles;
 
+    // Couldn't this just be budget.name?
+//    @ColumnInfo(name = "nickname")
+//    private String nickname;
+
     public Vehicle(String make, String model, Date year, int miles) {
         super();
         this.make = make;
         this.model = model;
         this.year = year;
         this.miles = miles;
+        // if name hasn't been set in budget, then default to:
+        this.setName(make + ": " + model + " " + year.toString());
     }
 
 //    public int getID() {
@@ -66,4 +72,13 @@ public class Vehicle extends Budget {
         this.miles = miles;
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + "Vehicle{" +
+                "make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", year=" + year +
+                ", miles=" + miles +
+                '}';
+    }
 }

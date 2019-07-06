@@ -1,6 +1,7 @@
 package edu.byui.myapplication.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "budget")
@@ -15,6 +16,7 @@ public class Budget {
         this.amount = amount;
     }
 
+    @Ignore
     public Budget() {
 
     }

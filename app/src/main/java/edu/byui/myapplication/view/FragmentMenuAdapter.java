@@ -13,7 +13,7 @@ public class FragmentMenuAdapter extends FragmentStatePagerAdapter {
     private final List<Fragment> fragmentList = new ArrayList<>();
 
     public FragmentMenuAdapter(@NonNull FragmentManager fm, int behavior) {
-        super(fm);
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
     public void addFragment(Fragment fragment,String title) {

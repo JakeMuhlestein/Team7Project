@@ -6,21 +6,21 @@
     tools:context=".view.VehicleFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/vehicle_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/vehicle_summary" />
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <!-- TODO: Research recyclerview
-    <TextView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/vehicle_summary" />-->
+        tools:listitem="@layout/vehicle_item" />
+
+    <!--Reusing ic_add_vendor graphic. Perhaps this should be renamed to something
+     less coupled t<O>__<O>l
+     -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button_add_vehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_vendor"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="32dp"/>
 
 </FrameLayout>
 

@@ -15,7 +15,7 @@ public class BudgetPresenter {
         return DataRepository.getInstance().createBudget(budget);
     }
 
-    public boolean updateCategory(Budget budget) throws Exception {
-        return DataRepository.getInstance().updateCategory(budget);
-    }
+//    public boolean updateCategory(Budget budget) throws Exception {
+//        return DataRepository.getInstance().updateCategory(budget);
+//    }
 }

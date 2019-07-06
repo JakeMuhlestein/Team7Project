@@ -17,7 +17,7 @@ public class BudgetRepository {
 
     public BudgetRepository(Application application) {
         TeamDatabase teamDatabase = TeamDatabase.getInstance(application);
-        budgetDao = teamDatabase.budgetDao();
+        budgetDao = teamDatabase.getBudgetDao();
         allBudgetItems = budgetDao.getAllCategories();
     }
 

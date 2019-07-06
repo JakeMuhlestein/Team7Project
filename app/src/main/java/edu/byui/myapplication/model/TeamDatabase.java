@@ -16,7 +16,7 @@ import androidx.room.TypeConverters;
  * class below
  *
  */
-@Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class, Vendor.class, Vehicle.class}, version = 1)
+@Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class, Vendor.class, Vehicle.class}, version = 2)
 @TypeConverters({DateTypeConverter.class})
 public abstract class TeamDatabase extends RoomDatabase {
 
@@ -26,7 +26,6 @@ public abstract class TeamDatabase extends RoomDatabase {
     // abstract methods with 0 arguments returning a @Dao
     // for each class/entity.
     // we'll need one for each of the entities above
-    public abstract BudgetDao budgetDao();
     public abstract BudgetDao getBudgetDao();
     public abstract PayMethodDao getPayMethodDao();
     public abstract TransactionDao getTransactionDao();
@@ -65,8 +64,9 @@ public abstract class TeamDatabase extends RoomDatabase {
 
     /**
      * Returns an instance of the database managed by room.
-     * @param context
+     * @param context application context
      * @return TeamDatabase instance
+     *
      */
     public static TeamDatabase getInstance(Context context) {
         synchronized (sLock) {
@@ -74,6 +74,7 @@ public abstract class TeamDatabase extends RoomDatabase {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         TeamDatabase.class, "Team.db")
                         //.addMigrations(MIGRATION_1_2) Migrations would go here.
+                        .fallbackToDestructiveMigration()   // This deletes all the data when the database changes.
                         .build();
             }
             return INSTANCE;

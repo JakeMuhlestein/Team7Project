@@ -16,7 +16,7 @@ import androidx.room.PrimaryKey;
  * validated first through validateInstructions().
  *
  */
-@Entity
+@Entity(tableName = "report")
 public class Report {
 
     //giving it an id

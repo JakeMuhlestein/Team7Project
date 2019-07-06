@@ -18,13 +18,16 @@ import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
 import edu.byui.myapplication.presenter.UserPresenter;
 
+/**
+ * This class may soon be depricated/deleted
+ */
 public class DataRepository {
     final String TAG = "DataRepository: ";
     private static DataRepository instance;
     private User user;
     private final TeamDatabase db;
 
-    //inplementing a private constructor. Going for a singleton here.
+    //implementing a private constructor. Going for a singleton here.
     private DataRepository(final TeamDatabase db) {
         this.db = db;
 
