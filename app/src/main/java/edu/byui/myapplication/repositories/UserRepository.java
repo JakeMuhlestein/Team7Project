@@ -19,7 +19,7 @@ public class UserRepository {
     public UserRepository(Application application) {
         TeamDatabase teamDatabase = TeamDatabase.getInstance(application);
         userDao = teamDatabase.getUserDao();
-        allUsers = (LiveData<List<User>>) userDao.getAllUsers();
+        allUsers = userDao.getAllUsers();
     }
 
     public void insert(User user) {
@@ -36,7 +36,7 @@ public class UserRepository {
         new DeleteUserAsyncTask(userDao).execute(user);
     }
 
-    public LiveData<List<User>> getAllusers() {
+    public LiveData<List<User>> getAllUsers() {
         return allUsers;
     }
 
@@ -82,4 +82,5 @@ public class UserRepository {
         }
     }
 }
+
 
