@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM user")
-    List<User> getAll();
+    List<User> getAllUsers();
 
     @Query("SELECT * FROM user WHERE id IN (:userIds)")
     List<User> loadAllByIds(int[] userIds);
