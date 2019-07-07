@@ -27,4 +27,7 @@ public interface VendorDao {
     @Query("SELECT * FROM vendor ORDER BY name")
     LiveData<List<Vendor>> getAllVendors();
 
+    @Query("SELECT * FROM vendor ORDER BY id")
+    List<Vendor> getAllVendorsStub();
+
 }

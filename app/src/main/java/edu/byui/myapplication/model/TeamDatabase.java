@@ -1,11 +1,20 @@
 package edu.byui.myapplication.model;
 
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Contains the database holder and serves as the main access
@@ -19,7 +28,7 @@ import androidx.room.TypeConverters;
 @Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class, Vendor.class, Vehicle.class}, version = 2)
 @TypeConverters({DateTypeConverter.class})
 public abstract class TeamDatabase extends RoomDatabase {
-
+    final static String TAG = "TeamDatabase: ";
     // This is the actual database instance.
     private static TeamDatabase INSTANCE;
 
@@ -69,16 +78,125 @@ public abstract class TeamDatabase extends RoomDatabase {
      *
      */
     public static TeamDatabase getInstance(Context context) {
+        Log.i(TAG,"Geting instance");
         synchronized (sLock) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         TeamDatabase.class, "Team.db")
-                        //.addMigrations(MIGRATION_1_2) Migrations would go here.
                         .fallbackToDestructiveMigration()   // This deletes all the data when the database changes.
+                        .addCallback(roomCallback)
                         .build();
             }
             return INSTANCE;
         }
+    }
+
+    public static RoomDatabase.Callback roomCallback = new Callback() {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) { //if the database is not created
+            super.onCreate(db);
+            new PopulateDBAsyncTask(INSTANCE).execute();
+        }
+
+        @Override
+        public void onOpen(@NonNull SupportSQLiteDatabase db) {//if the database is created
+            super.onOpen(db);
+            new PopulateDBAsyncTask(INSTANCE).execute();
+        }
+    };
+
+    private static class PopulateDBAsyncTask extends AsyncTask<Void,Void,Void> {
+        final String TAG = "PopulateDB Thread: ";
+
+        private VendorDao vendor;
+        private UserDao user;
+        private PayMethodDao payMethod;
+        private BudgetDao budget;
+        private TransactionDao transaction;
+
+        private PopulateDBAsyncTask(TeamDatabase db) {
+            transaction = db.getTransactionDao();
+            vendor = db.getVendorDao();
+            user = db.getUserDao();
+            payMethod = db.getPayMethodDao();
+            budget = db.getBudgetDao();
+        }
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Log.i(TAG,"Executing background");
+            createStubUsers();
+            createStubVendors();
+            createStubBudgets();
+            createStubPayMethods();
+            createStubTransactions();
+            return null;
+        }
+
+        private void createStubUsers() {
+            user.deleteAll();
+            user.insert(new User("dongvt",
+                                 "Govert",
+                                 "email@email.com",
+                                 "5555555",
+                                 "av siempre viva"
+                        ));
+        }
+
+        private void createStubPayMethods() {
+            payMethod.deleteAll();
+            payMethod.insert(new PayMethod("Cash","Number555",555555,60000));
+            payMethod.insert(new PayMethod("Credit","84728727",88888,10000));
+            payMethod.insert(new PayMethod("Card","272975",9999,20000));
+        }
+
+        private void createStubBudgets() {
+            budget.deleteAllBudgetItems();
+            budget.insertCategory(new Budget("Home",50));
+            budget.insertCategory(new Budget("Car",300));
+            budget.insertCategory(new Budget("Food",500));
+        }
+
+        private void createStubVendors() {
+            vendor.deleteAll();
+            vendor.insert(new Vendor("Govert"));
+            vendor.insert(new Vendor("Armando"));
+            vendor.insert(new Vendor("Julio"));
+        }
+
+        private void createStubTransactions() {
+            transaction.deleteAll();
+            //The t means "transaction"
+            List<Vendor> tVendor = vendor.getAllVendorsStub();
+            List<Budget> tBudget = budget.getAllCategoriesStub();
+            List<PayMethod> tPayMethod = payMethod.getAllSub();
+            List<User> tUser =  user.loadUserByUsername("dongvt");
+
+            transaction.createTransaction(new Transaction(tUser.get(0).getUserID(),
+                    new Date(000000000),
+                    tVendor.get(1).getId(),
+                    tPayMethod.get(1).getId(),
+                    tBudget.get(1).getId(),
+                    25,
+                    "First example"));
+
+            transaction.createTransaction(new Transaction(tUser.get(0).getUserID(),
+                    new Date(33333),
+                    tVendor.get(2).getId(),
+                    tPayMethod.get(1).getId(),
+                    tBudget.get(2).getId(),
+                    12,
+                    "Second example"));
+
+            transaction.createTransaction(new Transaction(tUser.get(0).getUserID(),
+                    new Date(0000020000),
+                    tVendor.get(0).getId(),
+                    tPayMethod.get(1).getId(),
+                    tBudget.get(2).getId(),
+                    20,
+                    "Third example"));
+
+        }
+
     }
 
 

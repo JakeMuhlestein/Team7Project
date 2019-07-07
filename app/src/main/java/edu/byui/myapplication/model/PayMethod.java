@@ -20,8 +20,19 @@ public class PayMethod {
     Date expDate;
     double points;
 
+    public PayMethod(String payType, String acctNumber, double balance, double points) {
+        this.payType = payType;
+        this.acctNumber = acctNumber;
+        this.balance = balance;
+        this.points = points;
+    }
+
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPayType() {
@@ -52,6 +63,9 @@ public class PayMethod {
         balance += points;
     }
 
+
+
+    @Ignore
     public PayMethod() {
         // hack workaround please change.
         //expDate = new Date(2006, 6, 14);

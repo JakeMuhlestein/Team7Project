@@ -31,7 +31,10 @@ public interface BudgetDao {
 
     //We're probably going to need another column called "active" or something
     @Query("SELECT * FROM budget")
-    public LiveData<List<Budget>> getAllCategories();
+    LiveData<List<Budget>> getAllCategories();
+
+    @Query("SELECT * FROM budget")
+    List<Budget> getAllCategoriesStub();
 
 
     @Update

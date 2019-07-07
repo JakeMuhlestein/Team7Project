@@ -34,4 +34,7 @@ public interface TransactionDao {
 
     @Delete
     public int deleteTransaction(Transaction transaction);
+
+    @Query("DELETE FROM `Transaction`")
+    public void deleteAll();
 }

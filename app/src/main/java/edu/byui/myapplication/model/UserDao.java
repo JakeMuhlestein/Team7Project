@@ -1,5 +1,6 @@
 package edu.byui.myapplication.model;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -33,6 +34,9 @@ public interface UserDao {
 
     @Delete
     void delete(User user);
+
+    @Query("DELETE FROM user")
+    void deleteAll();
 
     // no blanket updates
 }
