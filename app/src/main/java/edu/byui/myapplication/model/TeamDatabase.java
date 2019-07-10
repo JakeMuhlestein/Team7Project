@@ -124,6 +124,7 @@ public abstract class TeamDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
             Log.i(TAG,"Executing background");
+            deleteAll();
             createStubUsers();
             createStubVendors();
             createStubBudgets();
@@ -132,8 +133,15 @@ public abstract class TeamDatabase extends RoomDatabase {
             return null;
         }
 
-        private void createStubUsers() {
+        private void deleteAll() {
+            transaction.deleteAll();
             user.deleteAll();
+            payMethod.deleteAll();
+            budget.deleteAllBudgetItems();
+            vendor.deleteAll();
+        }
+
+        private void createStubUsers() {
             user.insert(new User("dongvt",
                                  "Govert",
                                  "email@email.com",
@@ -143,28 +151,24 @@ public abstract class TeamDatabase extends RoomDatabase {
         }
 
         private void createStubPayMethods() {
-            payMethod.deleteAll();
             payMethod.insert(new PayMethod("Cash","Number555",555555,60000));
             payMethod.insert(new PayMethod("Credit","84728727",88888,10000));
             payMethod.insert(new PayMethod("Card","272975",9999,20000));
         }
 
         private void createStubBudgets() {
-            budget.deleteAllBudgetItems();
             budget.insertCategory(new Budget("Home",50));
             budget.insertCategory(new Budget("Car",300));
             budget.insertCategory(new Budget("Food",500));
         }
 
         private void createStubVendors() {
-            vendor.deleteAll();
             vendor.insert(new Vendor("Govert"));
             vendor.insert(new Vendor("Armando"));
             vendor.insert(new Vendor("Julio"));
         }
 
         private void createStubTransactions() {
-            transaction.deleteAll();
             //The t means "transaction"
             List<Vendor> tVendor = vendor.getAllVendorsStub();
             List<Budget> tBudget = budget.getAllCategoriesStub();
@@ -194,7 +198,6 @@ public abstract class TeamDatabase extends RoomDatabase {
                     tBudget.get(2).getId(),
                     20,
                     "Third example"));
-
         }
 
     }
