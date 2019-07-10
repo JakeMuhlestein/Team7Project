@@ -1,4 +1,4 @@
-package edu.byui.myapplication.presenter;
+package edu.byui.myapplication.viewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,11 +14,11 @@ import edu.byui.myapplication.R;
 
 public class AddEditBudgetActivity extends AppCompatActivity {
     public static final String EXTRA_ID =
-            "edu.byui.myapplication.presenter.EXTRA_ID";
+            "edu.byui.myapplication.viewModel.EXTRA_ID";
     public static final String EXTRA_BUDGET_NAME =
-            "edu.byui.myapplication.presenter.EXTRA_BUDGET_NAME";
+            "edu.byui.myapplication.viewModel.EXTRA_BUDGET_NAME";
     public static final String EXTRA_BUDGET_AMOUNT =
-            "edu.byui.myapplication.presenter.EXTRA_BUDGET_AMOUNT";
+            "edu.byui.myapplication.viewModel.EXTRA_BUDGET_AMOUNT";
 
     private EditText editTextBudgetName;
     private EditText editTextBudgetAmount;

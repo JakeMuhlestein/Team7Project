@@ -9,14 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presenter.AddEditBudgetActivity"
-            android:parentActivityName=".presenter.BudgetActivity"/>
+        <activity android:name=".view.MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".presenter.AddVendorActivity"
+            android:name=".viewModel.AddEditBudgetActivity"
+            android:parentActivityName=".viewModel.BudgetActivity" />
+        <activity
+            android:name=".viewModel.AddVendorActivity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".view.FragmentContainer" />
         <activity android:name=".view.Login" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

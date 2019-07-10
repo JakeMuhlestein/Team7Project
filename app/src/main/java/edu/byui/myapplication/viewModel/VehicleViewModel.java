@@ -1,4 +1,4 @@
-package edu.byui.myapplication.presenter;
+package edu.byui.myapplication.viewModel;
 
 import android.app.Application;
 

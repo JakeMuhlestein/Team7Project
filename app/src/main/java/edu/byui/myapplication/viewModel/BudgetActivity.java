@@ -1,4 +1,4 @@
-package edu.byui.myapplication.presenter;
+package edu.byui.myapplication.viewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ public class BudgetActivity extends AppCompatActivity {
 
     private BudgetViewModel budgetViewModel;
     //public static final String EXTRA_NAME =
-    //        "edu.byui.myapplication.presenter.EXTRA_NAME";
+    //        "edu.byui.myapplication.viewModel.EXTRA_NAME";
 
     //private EditText vendorName;
 

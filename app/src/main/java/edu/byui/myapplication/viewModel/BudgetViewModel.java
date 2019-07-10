@@ -1,4 +1,4 @@
-package edu.byui.myapplication.presenter;
+package edu.byui.myapplication.viewModel;
 
 import android.app.Application;
 
@@ -9,9 +9,7 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import edu.byui.myapplication.model.Budget;
-import edu.byui.myapplication.model.Vendor;
 import edu.byui.myapplication.repositories.BudgetRepository;
-import edu.byui.myapplication.repositories.VendorRepository;
 
 public class BudgetViewModel extends AndroidViewModel {
     private BudgetRepository repository;

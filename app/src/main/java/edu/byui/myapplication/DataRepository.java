@@ -16,7 +16,6 @@ import edu.byui.myapplication.model.BudgetDao;
 import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
-import edu.byui.myapplication.presenter.UserPresenter;
 
 /**
  * This class may soon be depricated/deleted
@@ -139,9 +138,9 @@ public class DataRepository {
         protected void onPostExecute(User user) {
             super.onPostExecute(user);
             // need to return this user.
-            // We normally would do this by notifying the presenter class.
+            // We normally would do this by notifying the viewModel class.
             // This is a UserPresenter extends ViewModel. Look into that.
-            //UserPresenter presenter = new UserPresenter().notify();
+            //UserPresenter viewModel = new UserPresenter().notify();
 
         }
     }

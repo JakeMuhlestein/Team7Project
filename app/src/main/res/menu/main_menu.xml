@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group>
+        <item android:id="@+id/transaction"
+            android:icon="@drawable/ic_transaction"
+            android:title="Transactions"/>
+        <item android:id="@+id/vendor"
+            android:icon="@drawable/ic_vendor"
+            android:title="Vendors"/>
+        <item android:id="@+id/credit_card"
+            android:icon="@drawable/ic_credit_card"
+            android:title="Credit Cards"/>
+        <item android:id="@+id/rewards"
+            android:icon="@drawable/ic_rewards"
+            android:title="Rewards"/>
+        <item android:id="@+id/budgets"
+            android:icon="@drawable/ic_budgets"
+            android:title="Budgets"/>
+        <item android:id="@+id/vehicle"
+            android:icon="@drawable/ic_vehicle"
+            android:title="Vehicle"/>
+
+
+    </group>
+
+</menu>

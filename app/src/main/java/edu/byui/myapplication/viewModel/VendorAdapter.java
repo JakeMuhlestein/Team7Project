@@ -1,4 +1,4 @@
-package edu.byui.myapplication.presenter;
+package edu.byui.myapplication.viewModel;
 
 import android.view.LayoutInflater;
 import android.view.View;

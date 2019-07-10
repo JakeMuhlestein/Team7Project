@@ -1,4 +1,4 @@
-package edu.byui.myapplication.presenter;
+package edu.byui.myapplication.viewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,7 +15,7 @@ import edu.byui.myapplication.R;
 public class AddVendorActivity extends AppCompatActivity {
 
     public static final String EXTRA_NAME =
-            "edu.byui.myapplication.presenter.EXTRA_NAME";
+            "edu.byui.myapplication.viewModel.EXTRA_NAME";
 
     private EditText vendorName;
 

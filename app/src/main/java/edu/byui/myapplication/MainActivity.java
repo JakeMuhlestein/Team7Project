@@ -3,32 +3,26 @@ package edu.byui.myapplication;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.gson.Gson;
 
 import java.util.List;
 
 import edu.byui.myapplication.model.TeamDatabase;
-import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.Vendor;
-import edu.byui.myapplication.model.VendorDao;
-import edu.byui.myapplication.presenter.AddVendorActivity;
-import edu.byui.myapplication.presenter.VendorAdapter;
-import edu.byui.myapplication.presenter.VendorViewModel;
-import edu.byui.myapplication.view.Login;
+import edu.byui.myapplication.view.MenuActivity;
+import edu.byui.myapplication.viewModel.AddVendorActivity;
+import edu.byui.myapplication.viewModel.VendorAdapter;
+import edu.byui.myapplication.viewModel.VendorViewModel;
 
 //Mark Tobler comment
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+        startActivityForResult(intent, 1);
+        /*
         FloatingActionButton buttonAddVendor = findViewById(R.id.button_add_vendor);
         buttonAddVendor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setVendors(vendors);
             }
         });
-
+        */
 
 
         /*User user = null;
@@ -94,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
         
     }
-
+    /*
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -111,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+    */
 
     //TODO: onResume needs to include a call to DataRepository's doNothing() method
 }

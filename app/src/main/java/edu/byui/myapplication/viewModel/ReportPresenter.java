@@ -1,4 +1,4 @@
-package edu.byui.myapplication.presenter;
+package edu.byui.myapplication.viewModel;
 
 import edu.byui.myapplication.model.Report;
 import edu.byui.myapplication.model.Vendor;
