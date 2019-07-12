@@ -25,11 +25,11 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
         <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
             android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:headerLayout="@layout/menu_header"
-            app:menu="@menu/main_menu"/>
+            app:menu="@menu/main_menu" />
 
     </LinearLayout>
 

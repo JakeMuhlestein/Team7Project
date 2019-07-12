@@ -59,7 +59,9 @@ public class AddVendorActivity extends AppCompatActivity {
                 saveVendor();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                finish();
+                return true;
+            /*super.onOptionsItemSelected(item);*/
         }
 
     }

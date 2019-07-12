@@ -56,15 +56,15 @@ public class VendorFragment extends Fragment {
         final VendorAdapter adapter = new VendorAdapter();
         recyclerView.setAdapter(adapter);
 
-        vendorViewModel = ViewModelProviders.of(this).get(VendorViewModel.class);
-        vendorViewModel.getAllVendors().observe(this, new Observer<List<Vendor>>() {
+        vendorViewModel = ViewModelProviders.of(getActivity()).get(VendorViewModel.class);
+        vendorViewModel.getAllVendors().observe(getViewLifecycleOwner(), new Observer<List<Vendor>>() {
             @Override
             public void onChanged(List<Vendor> vendors) {
                 adapter.setVendors(vendors);
             }
         });
 
-        return inflater.inflate(R.layout.fragment_vendor,container,false);
+        return view;
     }
 
     @Override
@@ -76,7 +76,6 @@ public class VendorFragment extends Fragment {
 
             Vendor vendor = new Vendor(name);
             vendorViewModel.insert(vendor);
-
             Toast.makeText(getActivity(), "Vendor saved", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getActivity(), "Vendor not saved", Toast.LENGTH_SHORT).show();
