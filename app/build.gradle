@@ -102,3 +102,8 @@ dependencies {
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:+'
 }
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:+'
+    implementation 'androidx.constraintlayout:constraintlayout:+'
+}

@@ -55,8 +55,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         //Get the selected item
         switch(menuItem.getItemId()) {
             case R.id.transaction:
-                /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new */
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new TransactionFragment()).commit();
                 break;
             case R.id.vendor:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -66,9 +66,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.rewards:
                 break;
-            case R.id.budget:
-                /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new BudgetFragment()).commit();*/
+            case R.id.budgets:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new BudgetFragment()).commit();
                 break;
             case R.id.vehicle:
                 break;
