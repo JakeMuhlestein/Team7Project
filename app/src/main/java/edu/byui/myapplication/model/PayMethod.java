@@ -9,6 +9,7 @@ import java.sql.Date;
 
 @Entity(tableName = "paymethod")
 public class PayMethod {
+    
     @PrimaryKey(autoGenerate = true)
     int id;
     @ColumnInfo(name = "pay_type")
