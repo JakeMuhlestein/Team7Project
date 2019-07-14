@@ -2,6 +2,7 @@ package edu.byui.myapplication.model;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -15,8 +16,20 @@ public interface PayMethodDao {
 //    @Update
 //    public void addRewardPoints(PayMethod payMethod, int points);
 
+
+
     @Insert
-    public void insert(PayMethod payMethod);
+    public void insertPayMethod(PayMethod payMethod);
+
+    @Update
+    public void updatePayMethod(PayMethod payMethod);
+
+    @Delete
+    public void deletePayMethod(PayMethod payMethod);
+
+    //Delete all from table
+    @Query("DELETE FROM paymethod")
+    void deleteAllPayMethodItems();
 
     @Query("DELETE FROM paymethod")
     public void deleteAll();

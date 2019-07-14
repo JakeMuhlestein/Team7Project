@@ -151,9 +151,9 @@ public abstract class TeamDatabase extends RoomDatabase {
         }
 
         private void createStubPayMethods() {
-            payMethod.insert(new PayMethod("Cash","Number555",555555,60000));
-            payMethod.insert(new PayMethod("Credit","84728727",88888,10000));
-            payMethod.insert(new PayMethod("Card","272975",9999,20000));
+            payMethod.insertPayMethod(new PayMethod("Cash","Number555",555555,60000));
+            payMethod.insertPayMethod(new PayMethod("Credit","84728727",88888,10000));
+            payMethod.insertPayMethod(new PayMethod("Card","272975",9999,20000));
         }
 
         private void createStubBudgets() {

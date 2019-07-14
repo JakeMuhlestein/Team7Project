@@ -7,14 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".view.BudgetFragment">
+    tools:context=".view.PayMethodFragment">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/budget_item"/>
+        tools:listitem="@layout/paymethod_item"/>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
