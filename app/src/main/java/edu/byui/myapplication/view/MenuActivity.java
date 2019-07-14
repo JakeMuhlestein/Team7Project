@@ -67,6 +67,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             case R.id.rewards:
                 break;
             case R.id.budget:
+                /*getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new BudgetFragment()).commit();*/
                 break;
             case R.id.vehicle:
                 break;
