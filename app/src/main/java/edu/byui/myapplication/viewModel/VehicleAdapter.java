@@ -38,7 +38,7 @@ public class VehicleAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
         return vehicles.size();
     }
 
-    public void setVendors (List<Vehicle> vehicles) {
+    public void setVehicles (List<Vehicle> vehicles) {
         this.vehicles = vehicles;
         notifyDataSetChanged();
     }

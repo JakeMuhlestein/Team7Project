@@ -21,6 +21,9 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".view.Login" />
         <activity
+            android:name=".viewModel.AddVehicleActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">
             <intent-filter>

@@ -141,6 +141,7 @@ public abstract class TeamDatabase extends RoomDatabase {
             vendor.deleteAll();
         }
 
+        // TODO MT: These are all going away, right? What's the plan on this?
         private void createStubUsers() {
             user.insert(new User("dongvt",
                                  "Govert",

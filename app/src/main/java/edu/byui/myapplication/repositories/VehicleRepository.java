@@ -22,7 +22,8 @@ public class VehicleRepository {
         allVehicles = dao.getAllVehicles();
     }
 
-    //for the livedata
+    // for the livedata. Since this will keep a current list of all vehicles
+    // do we every explicitly call it once it's been created (the LiveData)
     public LiveData<List<Vehicle>> getAllVehicles() { return allVehicles; }
 
     // for the AsyncClass dependent Methods

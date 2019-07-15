@@ -16,6 +16,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +26,14 @@ import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
 import edu.byui.myapplication.DataRepository;
+import edu.byui.myapplication.model.Vehicle;
+import edu.byui.myapplication.model.VehicleDao;
 
 @RunWith(AndroidJUnit4.class)
 public class DatabaseTester {
     private UserDao userDao;
     private BudgetDao budgetDao;
+    private VehicleDao vehicleDao;
     private TeamDatabase db;
     private final String TAG = "DatabaseTester";
 
@@ -39,12 +43,33 @@ public class DatabaseTester {
         db = Room.inMemoryDatabaseBuilder(context, TeamDatabase.class).build();
         userDao = db.getUserDao();
         budgetDao = db.getBudgetDao();
-
+        vehicleDao = db.getVehicleDao();
     }
 
     @After
     public void closeDb() throws IOException {
         db.close();
+    }
+
+    @Test
+    public void createVehicleTest() {
+        // first fire-up the test database in memory
+        // doesn't affect the actual database.
+        Context context = ApplicationProvider.getApplicationContext();
+        db = Room.inMemoryDatabaseBuilder(context, TeamDatabase.class).build();
+        vehicleDao = db.getVehicleDao();
+        // create an object that we want to save in the database.
+        Vehicle vehicle = new Vehicle("Ford", "Mustang", new Date(System.currentTimeMillis()), 32333);
+        vehicleDao.insertVehicle(vehicle);
+        LiveData<List<Vehicle>> vehicles = vehicleDao.getAllVehicles();
+        if(vehicles.getValue() != null) {
+            Log.d(TAG, "Vehicle: " + vehicles.getValue().get(0).toString());
+        } else {
+            Log.d(TAG, "Vehicle: failed to create");
+            assert(false);
+            // didn't pass
+        }
+
     }
 
     @Test
