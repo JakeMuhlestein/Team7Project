@@ -6,7 +6,7 @@
 
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submitReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -35,8 +35,8 @@
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="348dp"
-        android:layout_toStartOf="@+id/lastname"
-        android:layout_toLeftOf="@+id/lastname"
+        android:layout_toStartOf="@+id/lnameInput"
+        android:layout_toLeftOf="@+id/lnameInput"
         android:text="Last Name" />
 
     <TextView
@@ -51,8 +51,8 @@
         android:layout_marginTop="57dp"
         android:layout_marginEnd="37dp"
         android:layout_marginRight="37dp"
-        android:layout_toStartOf="@+id/firstname"
-        android:layout_toLeftOf="@+id/firstname"
+        android:layout_toStartOf="@+id/fnameInput"
+        android:layout_toLeftOf="@+id/fnameInput"
         android:text="First Name" />
 
     <TextView
@@ -79,8 +79,8 @@
         android:layout_marginTop="34dp"
         android:layout_marginEnd="29dp"
         android:layout_marginRight="29dp"
-        android:layout_toStartOf="@+id/comfirmpassword"
-        android:layout_toLeftOf="@+id/comfirmpassword"
+        android:layout_toStartOf="@+id/compasswordInput"
+        android:layout_toLeftOf="@+id/compasswordInput"
         android:text="@string/confirm_password" />
 
     <TextView
@@ -108,10 +108,10 @@
         android:text="Username" />
 
     <EditText
-        android:id="@+id/lastname"
+        android:id="@+id/lnameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/submitReg"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="45dp"
@@ -122,10 +122,10 @@
         android:text="" />
 
     <EditText
-        android:id="@+id/firstname"
+        android:id="@+id/fnameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/lastname"
+        android:layout_above="@+id/lnameInput"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginEnd="45dp"
@@ -135,10 +135,10 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/email"
+        android:id="@+id/emailInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/firstname"
+        android:layout_above="@+id/fnameInput"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="34dp"
@@ -152,11 +152,10 @@
         android:inputType="textEmailAddress" />
 
     <EditText
-        android:id="@+id/comfirmpassword"
+        android:id="@+id/compasswordInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/email"
-        android:layout_below="@+id/loginpass"
+        android:layout_above="@+id/emailInput"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="9dp"
@@ -167,10 +166,10 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/editText11"
+        android:id="@+id/passwordInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/comfirmpassword"
+        android:layout_above="@+id/compasswordInput"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="44dp"
@@ -184,10 +183,10 @@
         android:inputType="textPassword" />
 
     <EditText
-        android:id="@+id/editText12"
+        android:id="@+id/usernameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/editText11"
+        android:layout_above="@+id/passwordInput"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginStart="25dp"
@@ -200,6 +199,23 @@
         android:ems="10"
         android:inputType="textPersonName" />
 
+    <Button
+        android:id="@+id/cancelReg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginLeft="154dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginRight="170dp"
+        android:layout_marginBottom="173dp"
+        android:text="Cancel" />
+
 
 </RelativeLayout>
+
 
