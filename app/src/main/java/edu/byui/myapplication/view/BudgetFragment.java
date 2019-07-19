@@ -69,7 +69,6 @@ public class BudgetFragment extends Fragment {
             }
         });
 
-        //verify getAcivity();
         adapter.setOnItemClickListener(new BudgetAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Budget budget) {
@@ -81,6 +80,7 @@ public class BudgetFragment extends Fragment {
                 startActivityForResult(intent, EDIT_BUDGET_REQUEST);
 
             }
+
         });
 
         return view;
@@ -92,7 +92,7 @@ public class BudgetFragment extends Fragment {
 
         if (requestCode == ADD_BUDGET_REQUEST  && resultCode == RESULT_OK) {
             String budgetName = data.getStringExtra(AddEditBudgetActivity.EXTRA_BUDGET_NAME);
-            int budgetAmount = data.getIntExtra(AddEditBudgetActivity.EXTRA_BUDGET_AMOUNT, 1);
+            double budgetAmount = data.getDoubleExtra(AddEditBudgetActivity.EXTRA_BUDGET_AMOUNT, 100);
 
             Budget budget = new Budget(budgetName, budgetAmount);
             budgetViewModel.insert(budget);
@@ -105,9 +105,7 @@ public class BudgetFragment extends Fragment {
                 return;
             }
             String budgetName = data.getStringExtra(AddEditBudgetActivity.EXTRA_BUDGET_NAME);
-
-            //verify
-            int budgetAmount = data.getIntExtra(AddEditBudgetActivity.EXTRA_BUDGET_AMOUNT, 1);
+            double budgetAmount = data.getDoubleExtra(AddEditBudgetActivity.EXTRA_BUDGET_AMOUNT, 100);
 
             Budget budget = new Budget(budgetName, budgetAmount);
             budget.setId(id);

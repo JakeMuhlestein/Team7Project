@@ -45,12 +45,4 @@ public class Budget {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "Budget{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
 }

@@ -4,13 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.stetho.inspector.jsonrpc.protocol.EmptyResult;
+
 import edu.byui.myapplication.R;
+import edu.byui.myapplication.view.BudgetFragment;
 
 public class AddEditBudgetActivity extends AppCompatActivity {
     public static final String EXTRA_ID =
@@ -33,14 +37,23 @@ public class AddEditBudgetActivity extends AppCompatActivity {
         editTextBudgetAmount = findViewById(R.id.edit_budget_amount);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
+        //super.onBackPressed();
+
+
         Intent intent = getIntent();
         if(intent.hasExtra(EXTRA_ID)){
             setTitle("Edit Budget Item");
             editTextBudgetName.setText(intent.getStringExtra(EXTRA_BUDGET_NAME));
-            editTextBudgetAmount.setText(intent.getStringExtra(EXTRA_BUDGET_AMOUNT));
+
+            double amount = intent.getDoubleExtra(EXTRA_BUDGET_AMOUNT , 1000);
+            Log.i("MyApp", "READ HEAR --------------------------------------------->" + amount);
+
+            editTextBudgetAmount.setText(Double.toString(amount));
         } else {
             setTitle("Add Budget Item");
         }
+
+
     }
 
 
@@ -56,7 +69,7 @@ public class AddEditBudgetActivity extends AppCompatActivity {
 
         Intent data = new Intent();
         data.putExtra(EXTRA_BUDGET_NAME, budgetName);
-        data.putExtra(EXTRA_BUDGET_AMOUNT, budgetAmount);
+        data.putExtra(EXTRA_BUDGET_AMOUNT, Double.parseDouble(budgetAmount));
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
