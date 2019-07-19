@@ -17,6 +17,7 @@ import edu.byui.myapplication.model.Vehicle;
 public class VehicleAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<VehicleAdapter.VehicleHolder> {
 
     private List<Vehicle> vehicles = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -52,7 +53,28 @@ public class VehicleAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
             super(vehicleView);
             // this is where the vehicle assignment happens.
             vehicleName = vehicleView.findViewById(R.id.vehicleName);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(vehicles.get(position));
+                    }
+                }
+            });
+
         }
 
     }
+
+    public interface OnItemClickListener {
+        void onItemClick(Vehicle vehicle);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
 }

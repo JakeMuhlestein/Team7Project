@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import edu.byui.myapplication.R;
 
 public class AddVehicleActivity extends AppCompatActivity {
+    public static final String EXTRA_ID =
+            "edu.byui.myapplication.viewModel.vehicleActivity.EXTRA_ID";
     public static final String EXTRA_NAME =
             "edu.byui.myapplication.viewModel.vehicleActivity.EXTRA_NAME";
     public static final String EXTRA_MAKE =
@@ -23,12 +25,15 @@ public class AddVehicleActivity extends AppCompatActivity {
             "edu.byui.myapplication.viewModel.vehicleActivity.EXTRA_YEAR";
     public static final String EXTRA_MILEAGE =
             "edu.byui.myapplication.viewModel.vehicleActivity.EXTRA_MILEAGE";
+    public static final String EXTRA_AMOUNT =
+            "edu.byui.myapplication.viewModel.vehicleActivity.EXTRA_AMOUNT";
 
     private EditText vehicleName;
     private EditText vehicleMake;
     private EditText vehicleModel;
     private EditText vehicleYear;
     private EditText vehicleMileage;
+    private EditText vehicleBudget;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,7 @@ public class AddVehicleActivity extends AppCompatActivity {
         vehicleModel = findViewById(R.id.edit_text_vehicle_model);
         vehicleYear = findViewById(R.id.edit_text_vehicle_year);
         vehicleMileage = findViewById(R.id.edit_text_vehicle_mileage);
+        vehicleBudget = findViewById(R.id.edit_text_vehicle_budget);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("Add Vehicle");
@@ -56,8 +62,11 @@ public class AddVehicleActivity extends AppCompatActivity {
         String name = vehicleName.getText().toString();
         String make = vehicleMake.getText().toString();
         String model = vehicleModel.getText().toString();
-        String year = vehicleYear.getText().toString();
-        String mileage = vehicleMileage.getText().toString();
+        int year = Integer.parseInt(vehicleYear.getText().toString());
+        int mileage = Integer.parseInt(vehicleMileage.getText().toString());
+        // Need to allow for Vehicle's parent class's members.
+        // BudgetName is handled in vehicleName
+        Double amount = Double.parseDouble(vehicleBudget.getText().toString());
 
         // Vehicle name will be storied in the budgets table as "name"
         if (name.trim().isEmpty()) {
@@ -75,22 +84,28 @@ public class AddVehicleActivity extends AppCompatActivity {
             return;
         }
 
-        if (year.trim().isEmpty()) {
+        if (year < 1 ) {
             Toast.makeText(this, "Please insert valid vehicle year.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (mileage.trim().isEmpty()) {
+        if (mileage < 0) {
             Toast.makeText(this, "Please insert valid vehicle mileage.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (amount < -1000) {
+            Toast.makeText(this, "Please insert valid budget for this vehicle.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         Intent data = new Intent();
         data.putExtra(EXTRA_NAME,name);
-        data.putExtra(EXTRA_MAKE,name);
-        data.putExtra(EXTRA_MODEL,name);
-        data.putExtra(EXTRA_YEAR,name);
-        data.putExtra(EXTRA_MILEAGE,name);
+        data.putExtra(EXTRA_MAKE,make);
+        data.putExtra(EXTRA_MODEL,model);
+        data.putExtra(EXTRA_YEAR,year);
+        data.putExtra(EXTRA_MILEAGE,mileage);
+        data.putExtra(EXTRA_AMOUNT, amount);
 
         setResult(RESULT_OK,data);
         finish();

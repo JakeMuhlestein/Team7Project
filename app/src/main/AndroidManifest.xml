@@ -22,7 +22,7 @@
         <activity android:name=".view.Login" />
         <activity
             android:name=".viewModel.AddVehicleActivity"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".viewModel.VehicleActivity" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">

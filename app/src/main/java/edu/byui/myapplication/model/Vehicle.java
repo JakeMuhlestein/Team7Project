@@ -2,6 +2,7 @@ package edu.byui.myapplication.model;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 
 import java.sql.Date;
 
@@ -31,6 +32,18 @@ public class Vehicle extends Budget {
         // if name hasn't been set in budget, then default to:
         this.setName(make + ": " + model + " " + year.toString());
     }
+
+    @Ignore
+    public Vehicle(String make, String model, Date year, int miles, String name, double amount) {
+        super();
+        this.setName(name);
+        this.setAmount(amount);
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.miles = miles;
+    }
+
 
 //    public int getID() {
 //        return ID;

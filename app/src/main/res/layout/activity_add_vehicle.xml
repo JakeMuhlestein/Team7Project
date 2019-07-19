@@ -43,5 +43,12 @@
         android:hint="Vehicle Year"
         android:inputType="number"/>
 
+    <EditText
+        android:id="@+id/edit_text_vehicle_budget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Vehicle Budget"
+        android:inputType="numberDecimal"/>
+
 
 </LinearLayout>

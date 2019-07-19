@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.sql.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import edu.byui.myapplication.R;
@@ -28,6 +31,10 @@ import edu.byui.myapplication.model.Vehicle;
 import edu.byui.myapplication.viewModel.AddVehicleActivity;
 import edu.byui.myapplication.viewModel.VehicleAdapter;
 import edu.byui.myapplication.viewModel.VehicleViewModel;
+
+import static android.app.Activity.RESULT_OK;
+import static edu.byui.myapplication.viewModel.VehicleActivity.ADD_VEHICLE_REQUEST;
+import static edu.byui.myapplication.viewModel.VehicleActivity.EDIT_VEHICLE_REQUEST;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -82,8 +89,6 @@ public class VehicleFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            // TODO: need to plug in the extra strings from intent
-            // TODO: AddVehicleActivity needs doing.
             /*
             String name = data.getStringExtra(AddVehicleActivity.EXTRA_NAME);
 
@@ -91,6 +96,48 @@ public class VehicleFragment extends Fragment {
             vehicleViewModel.insert(vehicle);
             Toast.makeText(getActivity(), "Vehicle saved", Toast.LENGTH_SHORT).show();
             */
+            if (requestCode == ADD_VEHICLE_REQUEST  && resultCode == RESULT_OK) {
+                String vehicleName = data.getStringExtra(AddVehicleActivity.EXTRA_NAME);
+                String vehicleMake = data.getStringExtra(AddVehicleActivity.EXTRA_MAKE);
+                String vehicleModel = data.getStringExtra(AddVehicleActivity.EXTRA_MODEL);
+                //String tempStr = data.getStringExtra(AddVehicleActivity.EXTRA_YEAR); // TODO: do we need to allow for null?
+                int vehicleYear =  data.getIntExtra(AddVehicleActivity.EXTRA_YEAR, 1999); //  Integer.parseInt(tempStr); //
+                //tempStr = data.getStringExtra(AddVehicleActivity.EXTRA_MILEAGE); // TODO: do we need to allow for null?
+                int vehicleMileage = data.getIntExtra(AddVehicleActivity.EXTRA_MILEAGE, 0);
+
+                //verify
+                double vehicleAmount = data.getDoubleExtra(AddVehicleActivity.EXTRA_AMOUNT, 0.00);
+
+                // for the Year date
+                Calendar calYear = new GregorianCalendar(vehicleYear, 1, 1);
+
+                Vehicle vehicle = new Vehicle(vehicleMake, vehicleModel, new Date(calYear.getTimeInMillis()),
+                        vehicleMileage, vehicleName, vehicleAmount);
+                vehicleViewModel.insertVehicle(vehicle);
+                Toast.makeText(getActivity(), "Vehicle saved", Toast.LENGTH_SHORT).show();
+            } else if(requestCode== EDIT_VEHICLE_REQUEST && resultCode == RESULT_OK){
+                int id = data.getIntExtra(AddVehicleActivity.EXTRA_ID, -1);
+
+                if (id == -1) {
+                    Toast.makeText(getActivity(), "Vehicle can't be updated", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                String vehicleName = data.getStringExtra(AddVehicleActivity.EXTRA_NAME);
+                String vehicleMake = data.getStringExtra(AddVehicleActivity.EXTRA_MAKE);
+                String vehicleModel = data.getStringExtra(AddVehicleActivity.EXTRA_MODEL);
+                int vehicleYear = data.getIntExtra(AddVehicleActivity.EXTRA_YEAR, 1999);
+                int vehicleMileage = data.getIntExtra(AddVehicleActivity.EXTRA_MILEAGE, 0);
+                double vehicleAmount = data.getDoubleExtra(AddVehicleActivity.EXTRA_AMOUNT, 0.00);
+
+                Calendar calYear = new GregorianCalendar(vehicleYear, 1, 1);
+
+                Vehicle vehicle = new Vehicle(vehicleMake, vehicleModel, new Date(calYear.getTimeInMillis()),
+                        vehicleMileage, vehicleName, vehicleAmount);
+                vehicle.setId(id);
+                vehicleViewModel.updateVehicle(vehicle);
+
+                Toast.makeText(getActivity(), "Vehicle updated", Toast.LENGTH_SHORT).show();
+            }
         } else {
             Toast.makeText(getActivity(), "Vehicle not saved", Toast.LENGTH_SHORT).show();
         }
