@@ -22,4 +22,25 @@
         android:hint="Pay Method Acct Num"
         android:inputType="numberDecimal" />
 
+    <EditText
+        android:id="@+id/edit_payMethod_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Pay Method balance"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/edit_payMethod_expDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Pay Method Exp Data"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/edit_payMethod_points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Pay Method Points"
+        android:inputType="numberDecimal" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>

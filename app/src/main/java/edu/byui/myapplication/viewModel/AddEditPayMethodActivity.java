@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Date;
+
 import edu.byui.myapplication.R;
 
 public class AddEditPayMethodActivity extends AppCompatActivity {
@@ -42,6 +44,10 @@ public class AddEditPayMethodActivity extends AppCompatActivity {
 
         editTextPayMethodPayType = findViewById(R.id.edit_payMethod_name);
         editTextPayMethodAcctNumber = findViewById(R.id.edit_payMethod_acctNum);
+        editTextPayMethodBalance = findViewById(R.id.edit_payMethod_balance);
+        editTextPayMethodExpDate = findViewById(R.id.edit_payMethod_expDate);
+        editTextPayMethodPoints = findViewById(R.id.edit_payMethod_points);
+
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         Intent intent = getIntent();
@@ -49,6 +55,12 @@ public class AddEditPayMethodActivity extends AppCompatActivity {
             setTitle("Edit Pay Method Item");
             editTextPayMethodPayType.setText(intent.getStringExtra(EXTRA_PAYMETHOD_PAY_TYPE));
             editTextPayMethodAcctNumber.setText(intent.getStringExtra(EXTRA_PAYMETHOD_ACCT_NUMBER));
+            double balance = intent.getDoubleExtra(EXTRA_PAYMETHOD_BALANCE, 100);
+            editTextPayMethodBalance.setText(Double.toString(balance));
+            editTextPayMethodExpDate.setText(intent.getStringExtra(EXTRA_PAYMETHOD_EXP_DATE));
+            int points = intent.getIntExtra(EXTRA_PAYMETHOD_POINTS, 100);
+            editTextPayMethodPoints.setText(Integer.toString(points));
+
         } else {
             setTitle("Add Pay Method Item");
         }
@@ -58,6 +70,9 @@ public class AddEditPayMethodActivity extends AppCompatActivity {
     private void savePayMethod()  {
         String payMethodType = editTextPayMethodPayType.getText().toString();
         String payMethodAcctNum = editTextPayMethodAcctNumber.getText().toString();
+        String payMethodBalance = editTextPayMethodBalance.getText().toString();
+        String payMethodExpDate = editTextPayMethodExpDate.getText().toString();
+        String payMethodPoints = editTextPayMethodPoints.getText().toString();
 
         if (payMethodType.trim().isEmpty() || payMethodAcctNum.trim().isEmpty()) {
             Toast.makeText(this, "Please insert a Pay Method Type and Acct Number",
@@ -68,6 +83,9 @@ public class AddEditPayMethodActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_PAYMETHOD_PAY_TYPE, payMethodType);
         data.putExtra(EXTRA_PAYMETHOD_ACCT_NUMBER, payMethodAcctNum);
+        data.putExtra(EXTRA_PAYMETHOD_BALANCE, payMethodBalance);
+        data.putExtra(EXTRA_PAYMETHOD_EXP_DATE, payMethodExpDate);
+        data.putExtra(EXTRA_PAYMETHOD_POINTS, payMethodPoints);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
@@ -89,11 +107,12 @@ public class AddEditPayMethodActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save_payMethod:
+            case R.id.save:
                 savePayMethod();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                finish();
+                return true;
         }
 
     }

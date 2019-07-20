@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,11 @@ public class PayMethodAdapter extends RecyclerView.Adapter<PayMethodAdapter.PayM
     public void onBindViewHolder(@NonNull PayMethodHolder holder, int position) {
         PayMethod currentPayMethod = payMethods.get(position);
         holder.textViewPayType.setText(currentPayMethod.getPayType());
-        holder.textViewAcctNum.setText(String.valueOf(currentPayMethod.getAcctNumber()));
+        holder.textViewAcctNum.setText(currentPayMethod.getAcctNumber());
+        holder.textViewBalance.setText(String.valueOf(currentPayMethod.getBalance()));
+        holder.textViewExpDate.setText(String.valueOf(currentPayMethod.getExpDate()));
+        holder.textViewPoints.setText(String.valueOf(currentPayMethod.getPoints()));
+
     }
 
     @Override
@@ -46,12 +51,19 @@ public class PayMethodAdapter extends RecyclerView.Adapter<PayMethodAdapter.PayM
     class PayMethodHolder extends RecyclerView.ViewHolder {
         private TextView textViewPayType;
         private TextView textViewAcctNum;
+        private TextView textViewBalance;
+        private TextView textViewExpDate;
+        private TextView textViewPoints;
 
         public PayMethodHolder(@NonNull View itemView) {
             super(itemView);
             textViewPayType = itemView.findViewById(R.id.text_view_payMethod_type);
-            //update after finishing form
-            textViewAcctNum = itemView.findViewById(R.id.text_view_payMethod_balance);
+            textViewAcctNum = itemView.findViewById(R.id.text_view_payMethod_accNum);
+            textViewBalance = itemView.findViewById(R.id.text_view_payMethod_balance);
+            textViewExpDate = itemView.findViewById(R.id.text_view_payMethod_expDate);
+            textViewPoints = itemView.findViewById(R.id.text_view_payMethod_points);
+
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

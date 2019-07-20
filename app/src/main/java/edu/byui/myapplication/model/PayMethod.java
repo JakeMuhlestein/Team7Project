@@ -45,6 +45,13 @@ public class PayMethod {
 
 
     }
+    public PayMethod(String payType, String acctNumber, double balance, double points, Date expDate) {
+        this.payType = payType;
+        this.acctNumber = acctNumber;
+        this.balance = balance;
+        this.points = points;
+        this.expDate = expDate;
+    }
 
 
     public PayMethod(String payType, String acctNumber, double balance, double points) {

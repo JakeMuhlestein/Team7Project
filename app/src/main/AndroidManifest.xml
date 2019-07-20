@@ -16,7 +16,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".viewModel.AddEditBudgetActivity"
-            android:parentActivityName=".viewModel.BudgetActivity" />
+            android:parentActivityName=".view.MenuActivity" />
+        <activity
+            android:name=".viewModel.AddEditPayMethodActivity"
+            android:parentActivityName=".view.MenuActivity" />
         <activity
             android:name=".viewModel.AddVendorActivity"
             android:parentActivityName=".view.MenuActivity" />

@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import edu.byui.myapplication.R;
@@ -39,8 +41,8 @@ public class PayMethodFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_paymethod,container,false);
 
-        FloatingActionButton buttonAddVendor = view.findViewById(R.id.button_add_vendor);
-        buttonAddVendor.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton buttonAddPayMethod = view.findViewById(R.id.button_add);
+        buttonAddPayMethod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AddEditPayMethodActivity.class);
@@ -63,7 +65,6 @@ public class PayMethodFragment extends Fragment {
             }
         });
 
-        //verify getAcivity();
         adapter.setOnItemClickListener(new PayMethodAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(PayMethod payMethod) {
@@ -72,6 +73,9 @@ public class PayMethodFragment extends Fragment {
                 intent.putExtra(AddEditPayMethodActivity.EXTRA_ID, payMethod.getId());
                 intent.putExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_PAY_TYPE, payMethod.getPayType());
                 intent.putExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_ACCT_NUMBER, payMethod.getAcctNumber());
+                intent.putExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_BALANCE,payMethod.getBalance());
+                intent.putExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_EXP_DATE,payMethod.getExpDate());
+                intent.putExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_POINTS, payMethod.getPoints());
                 startActivityForResult(intent, EDIT_PAYMETHOD_REQUEST);
 
             }
@@ -87,8 +91,17 @@ public class PayMethodFragment extends Fragment {
         if (requestCode == ADD_PAYMETHOD_REQUEST  && resultCode == RESULT_OK) {
             String payMethodType = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_PAY_TYPE);
             String payMethodAcctNum = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_ACCT_NUMBER);
+            double payMethodBalance = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_BALANCE, 1234);
+            double payMethodPoints = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_POINTS, 1234);
+            String payMethodExpDate = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_EXP_DATE);
+            Date expDate = Date.valueOf(payMethodExpDate);
 
-            PayMethod payMethod = new PayMethod(payMethodType, payMethodAcctNum, 1.0, 1.0);
+
+
+            PayMethod payMethod = new PayMethod(payMethodType, payMethodAcctNum, payMethodBalance, payMethodPoints, expDate);
+
+
+
             payMethodViewModel.insert(payMethod);
             Toast.makeText(getActivity(), "Payment item saved", Toast.LENGTH_SHORT).show();
         } else if(requestCode== EDIT_PAYMETHOD_REQUEST && resultCode == RESULT_OK){
@@ -99,11 +112,14 @@ public class PayMethodFragment extends Fragment {
                 return;
             }
             String payMethodType = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_PAY_TYPE);
-
-            //verify
             String payMethodAcctNum = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_ACCT_NUMBER);
+            double payMethodBalance = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_BALANCE, 1234);
+            double payMethodPoints = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_POINTS, 1234);
+            String payMethodExpDate = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_EXP_DATE);
+            Date expDate = Date.valueOf(payMethodExpDate);
 
-            PayMethod payMethod = new PayMethod(payMethodType, payMethodAcctNum, 1, 1);
+
+            PayMethod payMethod = new PayMethod(payMethodType, payMethodAcctNum, payMethodBalance, payMethodPoints, expDate);
             payMethod.setId(id);
             payMethodViewModel.update(payMethod);
 
