@@ -19,20 +19,20 @@ public interface PayMethodDao {
 
 
     @Insert
-    public void insertPayMethod(PayMethod payMethod);
+    void insertPayMethod(PayMethod payMethod);
 
     @Update
-    public void updatePayMethod(PayMethod payMethod);
+    void updatePayMethod(PayMethod payMethod);
 
     @Delete
-    public void deletePayMethod(PayMethod payMethod);
+    void deletePayMethod(PayMethod payMethod);
 
     //Delete all from table
     @Query("DELETE FROM paymethod")
     void deleteAllPayMethodItems();
 
     @Query("DELETE FROM paymethod")
-    public void deleteAll();
+    void deleteAll();
 
     @Query("SELECT * FROM paymethod")
     LiveData<List<PayMethod>> getAllPaymentMethods();

@@ -138,7 +138,8 @@ public class TransactionFragment extends Fragment {
             transactionViewModel.insert(newTransaction);
 
             Toast.makeText(getActivity(), "Transaction Saved", Toast.LENGTH_SHORT).show();
-        } else if (requestCode == ADD_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
+        } else if ((requestCode == EDIT_NOTE_REQUEST) && (resultCode == Activity.RESULT_OK)) {
+
             int id = data.getIntExtra(AddEditTransactionActivity.EXTRA_ID,-1);
 
             if (id == -1) {
@@ -149,7 +150,6 @@ public class TransactionFragment extends Fragment {
             String sAmount  = data.getStringExtra(AddEditTransactionActivity.EXTRA_AMOUNT);
             String sComment = data.getStringExtra(AddEditTransactionActivity.EXTRA_COMMENT);
             String sDate    = data.getStringExtra(AddEditTransactionActivity.EXTRA_DATE);
-            String sUser    = sharedPreferences.getString(USER_KEY,"dongvt");
 
             int iVendor  = data.getIntExtra(AddEditTransactionActivity.EXTRA_VENDOR,-1);
             int iBudget  = data.getIntExtra(AddEditTransactionActivity.EXTRA_BUDGET,-1);
@@ -158,16 +158,16 @@ public class TransactionFragment extends Fragment {
 
             Date dDate = convertStringToDate(sDate);
 
-            Transaction newTransaction = new Transaction(iUser,
+            Transaction transaction = new Transaction(iUser,
                     dDate,
                     iVendor,
                     iPayment,
                     iBudget,
                     Double.parseDouble(sAmount),
                     sComment);
-            newTransaction.setId(id);
+            transaction.setId(id);
 
-            transactionViewModel.update(newTransaction);
+            transactionViewModel.update(transaction);
 
             Toast.makeText(getActivity(), "Transaction updated", Toast.LENGTH_SHORT).show();
 

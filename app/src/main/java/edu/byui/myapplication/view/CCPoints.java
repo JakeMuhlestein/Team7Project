@@ -15,7 +15,7 @@ public class CCPoints extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ccpoints);
 
-        Spinner mySpinner = (Spinner) findViewById(R.id.spinner1);
+        Spinner mySpinner = findViewById(R.id.spinner1);
 
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(CCPoints.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.rewardsCC));

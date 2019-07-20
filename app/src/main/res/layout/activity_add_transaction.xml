@@ -45,7 +45,7 @@
         android:id="@+id/transaction_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:layout_marginTop="20dip"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"/>
@@ -53,7 +53,7 @@
     <EditText
         android:id="@+id/transaction_comment"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="wrap_content"
         android:inputType="textLongMessage"
         android:layout_marginTop="20dip"
         android:layout_marginLeft="8dip"

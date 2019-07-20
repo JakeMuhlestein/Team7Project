@@ -14,16 +14,16 @@ import java.util.List;
 public interface BudgetDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    public void insertCategory(Budget budget);
+    void insertCategory(Budget budget);
 
     //@Query("UPDATE budget SET name = :budgetName, amount = :budgetAmount WHERE id = :id")
     // Simply pass it the updated Budget object
     @Update
-    public void updateCategory(Budget budget);
+    void updateCategory(Budget budget);
 
     // this will delete based on the ID.
     @Delete
-    public void deleteCategory(Budget budget);
+    void deleteCategory(Budget budget);
 
     //Delete all from table
     @Query("DELETE FROM budget")
@@ -38,11 +38,11 @@ public interface BudgetDao {
 
 
     @Update
-    public void updateCategories(List<Budget> budgets);
+    void updateCategories(List<Budget> budgets);
 
 
     @Query("SELECT * FROM budget WHERE name = :name")
-    public Budget getCategoryByName(String name);
+    Budget getCategoryByName(String name);
 
     /**
      * perhaps this conflict strategy should be abort?

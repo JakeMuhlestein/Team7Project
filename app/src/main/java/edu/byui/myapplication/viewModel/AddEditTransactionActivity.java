@@ -17,6 +17,7 @@ import android.widget.Toast;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import edu.byui.myapplication.R;
 import edu.byui.myapplication.model.Budget;
@@ -84,7 +85,7 @@ public class AddEditTransactionActivity extends AppCompatActivity {
         if (intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Transaction");
             date.setText(intent.getStringExtra(EXTRA_DATE));
-            amount.setText(intent.getStringExtra(EXTRA_AMOUNT));
+            amount.setText(String.format(Locale.getDefault(),"%.2f", (intent.getDoubleExtra(EXTRA_AMOUNT, 0.00))));
             comment.setText(intent.getStringExtra(EXTRA_COMMENT));
         } else {
             setTitle("Add Transaction");
@@ -139,7 +140,7 @@ public class AddEditTransactionActivity extends AppCompatActivity {
 
         Intent data = new Intent();
         data.putExtra(EXTRA_COMMENT, sComment);
-        data.putExtra(EXTRA_AMOUNT, sAmount);
+        data.putExtra(EXTRA_AMOUNT, String.format(Locale.getDefault(), "%.2f", Double.parseDouble(sAmount)));
         data.putExtra(EXTRA_DATE, sDate);
 
         data.putExtra(EXTRA_VENDOR, iVendor);

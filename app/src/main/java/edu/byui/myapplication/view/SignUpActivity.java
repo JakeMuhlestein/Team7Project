@@ -85,7 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     edtEmail.getText().toString(),
                                     edtPassword.getText().toString(),
                                     //edtComPassword.getText().toString(),
-                                    edtUsername.getText().toString());
+                                    edtUsername.getText().toString(),
+                                "123" );
                             userDao.insert(user);
                             progressDialog.dismiss();
                             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
@@ -102,13 +103,11 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean isEmpty(){
-        if (TextUtils.isEmpty(edtFname.getText().toString()) || TextUtils.isEmpty(edtLname.getText().toString()) ||
+        /*TextUtils.isEmpty(edtComPassword.getText().toString())
+||*/
+        return TextUtils.isEmpty(edtFname.getText().toString()) || TextUtils.isEmpty(edtLname.getText().toString()) ||
                 TextUtils.isEmpty(edtEmail.getText().toString()) || TextUtils.isEmpty(edtPassword.getText().toString()) || /*TextUtils.isEmpty(edtComPassword.getText().toString())
-        ||*/ TextUtils.isEmpty(edtUsername.getText().toString())){
-            return true;
-        }else{
-            return false;
-        }
+        ||*/ TextUtils.isEmpty(edtUsername.getText().toString());
 
     }
 }

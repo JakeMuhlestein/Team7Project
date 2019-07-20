@@ -79,7 +79,7 @@ public abstract class TeamDatabase extends RoomDatabase {
      *
      */
     public static TeamDatabase getInstance(Context context) {
-        Log.i(TAG,"Geting instance");
+        Log.i(TAG,"Getting instance");
         synchronized (sLock) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
@@ -122,6 +122,7 @@ public abstract class TeamDatabase extends RoomDatabase {
             payMethod = db.getPayMethodDao();
             budget = db.getBudgetDao();
         }
+
         @Override
         protected Void doInBackground(Void... voids) {
             Log.i(TAG,"Executing background");
@@ -149,7 +150,7 @@ public abstract class TeamDatabase extends RoomDatabase {
                                  "email@email.com",
                                  "5555555",
                                  "av siempre viva",
-                                "123"
+                                 "123"
                         ));
         }
 
