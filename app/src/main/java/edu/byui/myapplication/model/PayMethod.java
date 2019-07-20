@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.sql.Date;
 
@@ -20,6 +21,31 @@ public class PayMethod {
     @Ignore
     Date expDate;
     double points;
+
+    // reward types: miles(1), cashback(2), hotel(3), none(0).
+    @ColumnInfo(name = "rewards_type")
+    @TypeConverters(PayMethodRewardTypeConverter.class)
+    RewardsType rewardsType;
+
+    public enum RewardsType {
+        MILES(1),
+        CASHBACK(2),
+        HOTEL(3),
+        NONE(0);
+
+        private int code;
+
+        RewardsType(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+
+    }
+
 
     public PayMethod(String payType, String acctNumber, double balance, double points) {
         this.payType = payType;
@@ -76,5 +102,10 @@ public class PayMethod {
 //    @Ignore
 //    PayMethod(Date expDate) {
 //       this.expDate = expDate;
+//    }
+
+
+//    public class PayMethodRewardsType {
+//        enum
 //    }
 }
