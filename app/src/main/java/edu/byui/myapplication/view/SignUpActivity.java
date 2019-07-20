@@ -22,11 +22,14 @@ import edu.byui.myapplication.model.UserDao;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText edtUsername;
+    private EditText edtDisplayname;
     private EditText edtPassword;
     //private EditText edtComPassword;
     private EditText edtEmail;
-    private EditText edtFname;
-    private EditText edtLname;
+    private EditText edtPhone;
+    private EditText edtAddress;
+    private EditText edtBday;
+
 
     private Button btRCancel;
     private Button btRRegister;
@@ -47,11 +50,13 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setProgress(0);
 
         edtUsername = findViewById(R.id.usernameInput);
+        edtDisplayname = findViewById(R.id.disnameInput);
         edtPassword = findViewById(R.id.passwordInput);
         //edtComPassword = findViewById(R.id.compasswordInput);
         edtEmail = findViewById(R.id.emailInput);
-        edtFname = findViewById(R.id.fnameInput);
-        edtLname= findViewById(R.id.lnameInput);
+        edtPhone = findViewById(R.id.phoneInput);
+        edtAddress = findViewById(R.id.bdayInput);
+        edtBday = findViewById(R.id.bdayInput);
 
         btRCancel = findViewById(R.id.cancelReg);
         btRRegister = findViewById(R.id.submitReg);
@@ -80,12 +85,14 @@ public class SignUpActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            User user = new User(edtFname.getText().toString(),
-                                    edtLname.getText().toString(),
-                                    edtEmail.getText().toString(),
+                            User user = new User(
+                                    edtUsername.getText().toString(),
+                                    edtDisplayname.getText().toString(),
                                     edtPassword.getText().toString(),
-                                    //edtComPassword.getText().toString(),
-                                    edtUsername.getText().toString());
+                                    edtEmail.getText().toString(),
+                                    edtPhone.getText().toString(),
+                                    edtAddress.getText().toString(),
+                                    edtBday.getText().toString());
                             userDao.insert(user);
                             progressDialog.dismiss();
                             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
@@ -102,9 +109,9 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean isEmpty(){
-        if (TextUtils.isEmpty(edtFname.getText().toString()) || TextUtils.isEmpty(edtLname.getText().toString()) ||
+        if (TextUtils.isEmpty(edtPhone.getText().toString()) || TextUtils.isEmpty(edtAddress.getText().toString()) ||
                 TextUtils.isEmpty(edtEmail.getText().toString()) || TextUtils.isEmpty(edtPassword.getText().toString()) || /*TextUtils.isEmpty(edtComPassword.getText().toString())
-        ||*/ TextUtils.isEmpty(edtUsername.getText().toString())){
+        ||*/ TextUtils.isEmpty(edtUsername.getText().toString()) || TextUtils.isEmpty(edtDisplayname.getText().toString()) || TextUtils.isEmpty(edtBday.getText().toString())){
             return true;
         }else{
             return false;

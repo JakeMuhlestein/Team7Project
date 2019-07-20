@@ -43,6 +43,7 @@
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
                 android:textSize="17sp" />
+
         </RelativeLayout>
 
         <ImageView

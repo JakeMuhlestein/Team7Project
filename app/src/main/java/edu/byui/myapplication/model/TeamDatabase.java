@@ -146,10 +146,10 @@ public abstract class TeamDatabase extends RoomDatabase {
         private void createStubUsers() {
             user.insert(new User("dongvt",
                                  "Govert",
+                                 "123",
                                  "email@email.com",
-                                 "5555555",
-                                 "av siempre viva",
-                                "123"
+                                 "11111",
+                                "somewhere"
                         ));
         }
 
