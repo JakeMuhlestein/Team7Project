@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Pay Method Acct Num"
-        android:inputType="numberDecimal" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edit_payMethod_balance"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Pay Method Exp Data"
-        android:inputType="numberDecimal" />
+        android:inputType="date" />
 
     <EditText
         android:id="@+id/edit_payMethod_points"

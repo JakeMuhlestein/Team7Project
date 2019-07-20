@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +30,12 @@ public class PayMethodAdapter extends RecyclerView.Adapter<PayMethodAdapter.PayM
 
     @Override
     public void onBindViewHolder(@NonNull PayMethodHolder holder, int position) {
+        SimpleDateFormat format = new SimpleDateFormat("MM/YY");
         PayMethod currentPayMethod = payMethods.get(position);
         holder.textViewPayType.setText(currentPayMethod.getPayType());
         holder.textViewAcctNum.setText(currentPayMethod.getAcctNumber());
         holder.textViewBalance.setText(String.valueOf(currentPayMethod.getBalance()));
-        holder.textViewExpDate.setText(String.valueOf(currentPayMethod.getExpDate()));
+        holder.textViewExpDate.setText(format.format(currentPayMethod.getExpDate()));
         holder.textViewPoints.setText(String.valueOf(currentPayMethod.getPoints()));
 
     }

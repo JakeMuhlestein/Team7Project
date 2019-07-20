@@ -2,6 +2,7 @@ package edu.byui.myapplication.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,7 +95,9 @@ public class PayMethodFragment extends Fragment {
             double payMethodBalance = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_BALANCE, 1234);
             double payMethodPoints = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_POINTS, 1234);
             String payMethodExpDate = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_EXP_DATE);
-            Date expDate = Date.valueOf(payMethodExpDate);
+
+
+            Date expDate = convertStringToDate(payMethodExpDate);
 
 
 
@@ -104,6 +107,8 @@ public class PayMethodFragment extends Fragment {
 
             payMethodViewModel.insert(payMethod);
             Toast.makeText(getActivity(), "Payment item saved", Toast.LENGTH_SHORT).show();
+
+
         } else if(requestCode== EDIT_PAYMETHOD_REQUEST && resultCode == RESULT_OK){
             int id = data.getIntExtra(AddEditPayMethodActivity.EXTRA_ID, -1);
 
@@ -116,7 +121,8 @@ public class PayMethodFragment extends Fragment {
             double payMethodBalance = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_BALANCE, 1234);
             double payMethodPoints = data.getDoubleExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_POINTS, 1234);
             String payMethodExpDate = data.getStringExtra(AddEditPayMethodActivity.EXTRA_PAYMETHOD_EXP_DATE);
-            Date expDate = Date.valueOf(payMethodExpDate);
+
+            Date expDate = convertStringToDate(payMethodExpDate);
 
 
             PayMethod payMethod = new PayMethod(payMethodType, payMethodAcctNum, payMethodBalance, payMethodPoints, expDate);
@@ -130,5 +136,20 @@ public class PayMethodFragment extends Fragment {
             Toast.makeText(getActivity(), "Pay Method Not Saved", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private Date convertStringToDate(String sDate) {
+        Date dDate = null;
+        try {
+            //conversion from String to Java.SQL.date (outdated)
+            //https://stackoverflow.com/questions/530012/how-to-convert-java-util-date-to-java-sql-date
+
+            dDate = new Date(new SimpleDateFormat("MM/dd/yyyy").
+                    parse(sDate)
+                    .getTime());
+        } catch (Exception e) {
+            Log.e("AddTransactionError",e.getMessage());
+        }
+        return dDate;
     }
 }

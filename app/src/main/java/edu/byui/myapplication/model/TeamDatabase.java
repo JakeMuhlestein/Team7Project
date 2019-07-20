@@ -85,7 +85,7 @@ public abstract class TeamDatabase extends RoomDatabase {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         TeamDatabase.class, "Team.db")
                         .fallbackToDestructiveMigration()   // This deletes all the data when the database changes.
-                        .addCallback(roomCallback)
+                        //.addCallback(roomCallback)
                         .build();
             }
             return INSTANCE;
@@ -96,7 +96,7 @@ public abstract class TeamDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) { //if the database is not created
             super.onCreate(db);
-            new PopulateDBAsyncTask(INSTANCE).execute();
+            //new PopulateDBAsyncTask(INSTANCE).execute();
         }
 
         @Override

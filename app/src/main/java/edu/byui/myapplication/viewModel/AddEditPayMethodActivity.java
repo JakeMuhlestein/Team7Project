@@ -10,6 +10,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import edu.byui.myapplication.R;
@@ -57,9 +60,13 @@ public class AddEditPayMethodActivity extends AppCompatActivity {
             editTextPayMethodAcctNumber.setText(intent.getStringExtra(EXTRA_PAYMETHOD_ACCT_NUMBER));
             double balance = intent.getDoubleExtra(EXTRA_PAYMETHOD_BALANCE, 100);
             editTextPayMethodBalance.setText(Double.toString(balance));
-            editTextPayMethodExpDate.setText(intent.getStringExtra(EXTRA_PAYMETHOD_EXP_DATE));
-            int points = intent.getIntExtra(EXTRA_PAYMETHOD_POINTS, 100);
-            editTextPayMethodPoints.setText(Integer.toString(points));
+
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+            String strDate = dateFormat.format(intent.getSerializableExtra(EXTRA_PAYMETHOD_EXP_DATE));
+            editTextPayMethodExpDate.setText(strDate);
+            //editTextPayMethodExpDate.setText(intent.getStringExtra(EXTRA_PAYMETHOD_EXP_DATE));
+            double points = intent.getDoubleExtra(EXTRA_PAYMETHOD_POINTS, 100);
+            editTextPayMethodPoints.setText(Double.toString(points));
 
         } else {
             setTitle("Add Pay Method Item");
@@ -83,9 +90,9 @@ public class AddEditPayMethodActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_PAYMETHOD_PAY_TYPE, payMethodType);
         data.putExtra(EXTRA_PAYMETHOD_ACCT_NUMBER, payMethodAcctNum);
-        data.putExtra(EXTRA_PAYMETHOD_BALANCE, payMethodBalance);
+        data.putExtra(EXTRA_PAYMETHOD_BALANCE, Double.parseDouble(payMethodBalance));
         data.putExtra(EXTRA_PAYMETHOD_EXP_DATE, payMethodExpDate);
-        data.putExtra(EXTRA_PAYMETHOD_POINTS, payMethodPoints);
+        data.putExtra(EXTRA_PAYMETHOD_POINTS, Double.parseDouble(payMethodPoints));
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
