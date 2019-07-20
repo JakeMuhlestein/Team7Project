@@ -30,10 +30,10 @@ import edu.byui.myapplication.view.MenuActivity;
 import edu.byui.myapplication.viewModel.UserViewModel;
 
 public class MainActivity extends AppCompatActivity {
-    public final String USER_KEY = "edu.byu.myapplication.USER_KEY";
-    public final String USER_PREFERENCES_KEY = "edu.byu.myapplication.USER_PREFERENCES";
+    //public final String USER_KEY = "edu.byu.myapplication.USER_KEY";
+    //public final String USER_PREFERENCES_KEY = "edu.byu.myapplication.USER_PREFERENCES";
 
-    private UserViewModel userViewModel;
+    //private UserViewModel userViewModel;
 
     private EditText edtUsername;
     private EditText edtPassword;
@@ -117,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
         });
         */
 
-        Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-        startActivityForResult(intent, 1);
+        //Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+        //startActivityForResult(intent, 1);
 
         // for Stetho - Facebook's db tool
-        Stetho.initializeWithDefaults(this);
+        //Stetho.initializeWithDefaults(this);
         // right now we need DataRepository for Stetho
-        DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
+        //DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
         
     }
 
