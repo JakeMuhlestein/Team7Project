@@ -18,12 +18,13 @@ import edu.byui.myapplication.model.Transaction;
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionHolder> {
 
     private List<Transaction> transactionList = new ArrayList<>();
+    private OnItemClickListener listener;
 
     @NonNull
     @Override
     public TransactionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.transaction_item,parent,false);
+                .inflate(R.layout.transaction_item, parent, false);
         return new TransactionHolder(itemView);
     }
 
@@ -62,6 +63,24 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             transactionVendorName = itemView.findViewById(R.id.text_view_transaction_vendor);
             transactionDate = itemView.findViewById(R.id.text_view_transaction_date);
             transactionAmount = itemView.findViewById(R.id.text_view_transaction_amount);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION) {
+                        listener.onItemClick(transactionList.get(position));
+                    }
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Transaction transaction);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 }

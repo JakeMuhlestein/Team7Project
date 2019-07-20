@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".viewModel.AddTransactionActivity"
+        <activity android:name=".viewModel.AddEditTransactionActivity"
             android:parentActivityName=".view.MenuActivity" />
         <activity
             android:name=".view.MenuActivity"

@@ -5,10 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,14 +28,15 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import edu.byui.myapplication.MainActivity;
 import edu.byui.myapplication.R;
 import edu.byui.myapplication.model.Transaction;
-import edu.byui.myapplication.viewModel.AddTransactionActivity;
+import edu.byui.myapplication.viewModel.AddEditTransactionActivity;
 import edu.byui.myapplication.viewModel.TransactionAdapter;
 import edu.byui.myapplication.viewModel.TransactionViewModel;
 
 public class TransactionFragment extends Fragment {
+    public static final int ADD_NOTE_REQUEST = 1;
+    public static final int EDIT_NOTE_REQUEST = 2;
 
     private TransactionViewModel transactionViewModel;
     public final String USER_PREFERENCES_KEY = "edu.byu.myapplication.USER_PREFERENCES";
@@ -48,8 +51,8 @@ public class TransactionFragment extends Fragment {
         buttonAddVendor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AddTransactionActivity.class);
-                startActivityForResult(intent, 1);
+                Intent intent = new Intent(getActivity(), AddEditTransactionActivity.class);
+                startActivityForResult(intent, ADD_NOTE_REQUEST);
             }
         });
 
@@ -78,13 +81,29 @@ public class TransactionFragment extends Fragment {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int uniqueID = viewHolder.getAdapterPosition();
-                Toast.makeText(getActivity(), uniqueID, Toast.LENGTH_SHORT).show();
 
-                transactionViewModel.delete(adapter.getTransactionAt(viewHolder.getAdapterPosition()));
+                transactionViewModel.delete(adapter.getTransactionAt(uniqueID));
                 Toast.makeText(getActivity(), "Transaction Deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
+        adapter.setOnItemClickListener(new TransactionAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Transaction transaction) {
+                Intent intent = new Intent(getActivity(), AddEditTransactionActivity.class);
+
+                intent.putExtra(AddEditTransactionActivity.EXTRA_ID,transaction.getUserId());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_AMOUNT,transaction.getAmount());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_COMMENT,transaction.getNotes());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_DATE,transaction.getDate());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_VENDOR,transaction.getVendorId());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_BUDGET,transaction.getBudgetId());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_PAYMENT,transaction.getPayMethodId());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_USER,transaction.getUserId());
+
+                startActivityForResult(intent,EDIT_NOTE_REQUEST);
+            }
+        });
 
         return view;
     }
@@ -96,30 +115,64 @@ public class TransactionFragment extends Fragment {
         SharedPreferences sharedPreferences =
                 this.getActivity().getSharedPreferences(USER_PREFERENCES_KEY, Context.MODE_PRIVATE);
 
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            String sAmount  = data.getStringExtra(AddTransactionActivity.EXTRA_AMOUNT);
-            String sComment = data.getStringExtra(AddTransactionActivity.EXTRA_COMMENT);
-            String sDate    = data.getStringExtra(AddTransactionActivity.EXTRA_DATE);
+        if (requestCode == ADD_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
+            String sAmount  = data.getStringExtra(AddEditTransactionActivity.EXTRA_AMOUNT);
+            String sComment = data.getStringExtra(AddEditTransactionActivity.EXTRA_COMMENT);
+            String sDate    = data.getStringExtra(AddEditTransactionActivity.EXTRA_DATE);
             String sUser    = sharedPreferences.getString(USER_KEY,"dongvt");
 
-            int iVendor  = data.getIntExtra(AddTransactionActivity.EXTRA_VENDOR,-1);
-            int iBudget  = data.getIntExtra(AddTransactionActivity.EXTRA_BUDGET,-1);
-            int iPayment = data.getIntExtra(AddTransactionActivity.EXTRA_PAYMENT,-1);
-            int iUser    = data.getIntExtra(AddTransactionActivity.EXTRA_USER,-1);
+            int iVendor  = data.getIntExtra(AddEditTransactionActivity.EXTRA_VENDOR,-1);
+            int iBudget  = data.getIntExtra(AddEditTransactionActivity.EXTRA_BUDGET,-1);
+            int iPayment = data.getIntExtra(AddEditTransactionActivity.EXTRA_PAYMENT,-1);
+            int iUser    = data.getIntExtra(AddEditTransactionActivity.EXTRA_USER,-1);
 
             Date dDate = convertStringToDate(sDate);
 
-            Transaction newTransaction = new Transaction(iUser, //No user
+            Transaction newTransaction = new Transaction(iUser,
                     dDate,
                     iVendor,
                     iPayment,
                     iBudget,
                     Double.parseDouble(sAmount),
                     sComment);
-
             transactionViewModel.insert(newTransaction);
 
             Toast.makeText(getActivity(), "Transaction Saved", Toast.LENGTH_SHORT).show();
+        } else if (requestCode == ADD_NOTE_REQUEST && resultCode == Activity.RESULT_OK) {
+            int id = data.getIntExtra(AddEditTransactionActivity.EXTRA_ID,-1);
+
+            if (id == -1) {
+                Toast.makeText(getActivity(), "Error: please check with the administrator", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String sAmount  = data.getStringExtra(AddEditTransactionActivity.EXTRA_AMOUNT);
+            String sComment = data.getStringExtra(AddEditTransactionActivity.EXTRA_COMMENT);
+            String sDate    = data.getStringExtra(AddEditTransactionActivity.EXTRA_DATE);
+            String sUser    = sharedPreferences.getString(USER_KEY,"dongvt");
+
+            int iVendor  = data.getIntExtra(AddEditTransactionActivity.EXTRA_VENDOR,-1);
+            int iBudget  = data.getIntExtra(AddEditTransactionActivity.EXTRA_BUDGET,-1);
+            int iPayment = data.getIntExtra(AddEditTransactionActivity.EXTRA_PAYMENT,-1);
+            int iUser    = data.getIntExtra(AddEditTransactionActivity.EXTRA_USER,-1);
+
+            Date dDate = convertStringToDate(sDate);
+
+            Transaction newTransaction = new Transaction(iUser,
+                    dDate,
+                    iVendor,
+                    iPayment,
+                    iBudget,
+                    Double.parseDouble(sAmount),
+                    sComment);
+            newTransaction.setId(id);
+
+            transactionViewModel.update(newTransaction);
+
+            Toast.makeText(getActivity(), "Transaction updated", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(getActivity(), "Transaction not Saved", Toast.LENGTH_SHORT).show();
         }
     }
 

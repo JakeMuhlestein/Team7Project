@@ -25,8 +25,10 @@ import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
 import edu.byui.myapplication.model.Vendor;
 
-public class AddTransactionActivity extends AppCompatActivity {
+public class AddEditTransactionActivity extends AppCompatActivity {
     //Extra Keys
+    public static final String EXTRA_ID =
+            "edu.byui.myapplication.viewModel.EXTRA_ID";
     public static final String EXTRA_USER =
             "edu.byui.myapplication.viewModel.EXTRA_USER";
     public static final String EXTRA_BUDGET =
@@ -47,6 +49,7 @@ public class AddTransactionActivity extends AppCompatActivity {
     private PayMethodViewModel payMethodViewModel;
     private UserViewModel userViewModel;
 
+    Intent intent;
 
     private Spinner vendorSpinner;
     private Spinner budgetSpinner;
@@ -62,6 +65,7 @@ public class AddTransactionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_transaction);
 
+        intent = getIntent();
         //Load spinners
         populateBudgets();
         populateVendors();
@@ -69,18 +73,24 @@ public class AddTransactionActivity extends AppCompatActivity {
         populateUser();
 
         //Load EditText fields
-        date    = findViewById(R.id.transaction_date);
-        amount  = findViewById(R.id.transaction_amount);
+        date = findViewById(R.id.transaction_date);
+        amount = findViewById(R.id.transaction_amount);
         comment = findViewById(R.id.transaction_comment);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Transaction");
 
-        Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
+
+
+        if (intent.hasExtra(EXTRA_ID)) {
+            setTitle("Edit Transaction");
+            date.setText(intent.getStringExtra(EXTRA_DATE));
+            amount.setText(intent.getStringExtra(EXTRA_AMOUNT));
+            comment.setText(intent.getStringExtra(EXTRA_COMMENT));
+        } else {
+            setTitle("Add Transaction");
+        }
 
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,12 +114,12 @@ public class AddTransactionActivity extends AppCompatActivity {
 
     private void saveTransaction() {
         //the 's' means String - i means integer
-        String sAmount  = amount.getText().toString();
+        String sAmount = amount.getText().toString();
         String sComment = comment.getText().toString();
-        String sDate    = date.getText().toString();
+        String sDate = date.getText().toString();
 
-        int iVendor  = (int) vendorSpinner.getSelectedItemId();
-        int iBudget  = (int) budgetSpinner.getSelectedItemId();
+        int iVendor = (int) vendorSpinner.getSelectedItemId();
+        int iBudget = (int) budgetSpinner.getSelectedItemId();
         int iPayment = (int) paymentSpinner.getSelectedItemId();
 
         if (sComment.trim().isEmpty()) {
@@ -117,17 +127,33 @@ public class AddTransactionActivity extends AppCompatActivity {
             return;
         }
 
+        if (sDate.trim().isEmpty()) {
+            Toast.makeText(this, "Please Insert a Date", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (sAmount.trim().isEmpty()) {
+            Toast.makeText(this, "Please Insert a Amount", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         Intent data = new Intent();
-        data.putExtra(EXTRA_COMMENT,sComment);
-        data.putExtra(EXTRA_AMOUNT,sAmount);
-        data.putExtra(EXTRA_DATE,sDate);
+        data.putExtra(EXTRA_COMMENT, sComment);
+        data.putExtra(EXTRA_AMOUNT, sAmount);
+        data.putExtra(EXTRA_DATE, sDate);
 
-        data.putExtra(EXTRA_VENDOR,iVendor);
-        data.putExtra(EXTRA_BUDGET,iBudget);
-        data.putExtra(EXTRA_PAYMENT,iPayment);
-        data.putExtra(EXTRA_USER,userID);
+        data.putExtra(EXTRA_VENDOR, iVendor);
+        data.putExtra(EXTRA_BUDGET, iBudget);
+        data.putExtra(EXTRA_PAYMENT, iPayment);
+        data.putExtra(EXTRA_USER, userID);
 
-        setResult(RESULT_OK,data);
+        int id = getIntent().getIntExtra(EXTRA_ID,-1);
+
+        if (id != -1) {
+            data.putExtra(EXTRA_ID,id);
+        }
+
+        setResult(RESULT_OK, data);
         finish();
     }
 
@@ -141,6 +167,14 @@ public class AddTransactionActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Vendor> vendors) {
                 baseAdapterVendor.setVendorList(vendors);
+                if (intent.hasExtra(EXTRA_ID)) {
+                    int i = 0;
+                    for (Vendor vendor : vendors) {
+                        if (vendor.getId() == intent.getIntExtra(EXTRA_VENDOR, -1))
+                            vendorSpinner.setSelection(i);
+                        i++;
+                    }
+                }
             }
         });
         vendorSpinner.setAdapter(baseAdapterVendor);
@@ -157,6 +191,14 @@ public class AddTransactionActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Budget> budgets) {
                 baseAdapterBudget.setBudgetList(budgets);
+                if (intent.hasExtra(EXTRA_ID)) {
+                    int i = 0;
+                    for (Budget budget : budgets) {
+                        if (budget.getId() == intent.getIntExtra(EXTRA_BUDGET, -1))
+                            budgetSpinner.setSelection(i);
+                        i++;
+                    }
+                }
             }
         });
         budgetSpinner.setAdapter(baseAdapterBudget);
@@ -172,6 +214,14 @@ public class AddTransactionActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<PayMethod> payMethods) {
                 baseAdapterPayment.setPaymentList(payMethods);
+                if (intent.hasExtra(EXTRA_ID)) {
+                    int i = 0;
+                    for (PayMethod payMethod : payMethods) {
+                        if (payMethod.getId() == intent.getIntExtra(EXTRA_PAYMENT, -1))
+                            paymentSpinner.setSelection(i);
+                        i++;
+                    }
+                }
             }
         });
         paymentSpinner.setAdapter(baseAdapterPayment);
