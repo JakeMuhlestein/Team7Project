@@ -48,6 +48,10 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
         notifyDataSetChanged();
     }
 
+    public Transaction getTransactionAt(int position) {
+        return transactionList.get(position);
+    }
+
     class TransactionHolder extends RecyclerView.ViewHolder {
         private TextView transactionVendorName;
         private TextView transactionDate;
@@ -58,8 +62,6 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
             transactionVendorName = itemView.findViewById(R.id.text_view_transaction_vendor);
             transactionDate = itemView.findViewById(R.id.text_view_transaction_date);
             transactionAmount = itemView.findViewById(R.id.text_view_transaction_amount);
-
-
         }
     }
 }

@@ -80,12 +80,15 @@ public class SignUpActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            User user = new User(edtFname.getText().toString(), edtLname.getText().toString(),
-                                    edtEmail.getText().toString(), edtPassword.getText().toString(), edtComPassword.getText().toString(),
+                            /*User user = new User(edtFname.getText().toString(),
+                                    edtLname.getText().toString(),
+                                    edtEmail.getText().toString(),
+                                    edtPassword.getText().toString(),
+                                    edtComPassword.getText().toString(),
                                     edtUsername.getText().toString());
                             userDao.insert(user);
                             progressDialog.dismiss();
-                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));*/
                         }
                     }, 1000);
 

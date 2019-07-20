@@ -23,8 +23,11 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE id  = :userId")
     User loadUserById(int userId);
 
-   @Query("SELECT * FROM user WHERE username  = :username and password = :password")
+    @Query("SELECT * FROM user WHERE username  = :username and password = :password")
     User getUser(String username, String password);
+
+    @Query("SELECT * FROM user WHERE username  = :username")
+    List<User> loadUserByUsername(String username);
 
     @Insert
     void insert(User users);

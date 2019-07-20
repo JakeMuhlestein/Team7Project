@@ -27,13 +27,13 @@ public class AddVendorActivity extends AppCompatActivity {
         vendorName = findViewById(R.id.edit_text_vendor_name);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
-        setTitle("Add Vendor");
+        setTitle("Add Transaction");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_vendor_menu, menu);
+        menuInflater.inflate(R.menu.add_menu, menu);
         return true;
     }
 
@@ -55,7 +55,7 @@ public class AddVendorActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save_vendor:
+            case R.id.save:
                 saveVendor();
                 return true;
             default:

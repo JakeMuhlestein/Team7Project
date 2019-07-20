@@ -117,7 +117,7 @@ public class BudgetActivity extends AppCompatActivity {
     /*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.add_vendor_menu, menu);
+        menuInflater.inflate(R.menu. menu);
         return true;
     }
 

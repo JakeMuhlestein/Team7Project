@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".viewModel.AddTransactionActivity"></activity>
+        <activity android:name=".viewModel.AddTransactionActivity"
+            android:parentActivityName=".view.MenuActivity" />
         <activity
             android:name=".view.MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -18,8 +19,7 @@
             android:parentActivityName=".viewModel.BudgetActivity" />
         <activity
             android:name=".viewModel.AddVendorActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".view.Login" />
+            android:parentActivityName=".view.MenuActivity" />
         <activity
             android:name=".viewModel.AddVehicleActivity"
             android:parentActivityName=".viewModel.VehicleActivity" />
