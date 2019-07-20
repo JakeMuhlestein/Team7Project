@@ -52,6 +52,7 @@ public class PayMethod {
         this.acctNumber = acctNumber;
         this.balance = balance;
         this.points = points;
+        this.rewardsType = RewardsType.NONE;
     }
 
     public int getId() {
