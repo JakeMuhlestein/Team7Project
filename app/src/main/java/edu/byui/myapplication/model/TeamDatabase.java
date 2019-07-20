@@ -26,7 +26,7 @@ import java.util.List;
  * class below
  *
  */
-@Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class, Vendor.class, Vehicle.class}, version = 2)
+@Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class, Vendor.class, Vehicle.class}, version = 4)
 @TypeConverters({DateTypeConverter.class})
 public abstract class TeamDatabase extends RoomDatabase {
     final static String TAG = "TeamDatabase: ";

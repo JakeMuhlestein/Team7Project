@@ -63,6 +63,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                         new VendorFragment()).commit();
                 break;
             case R.id.credit_card:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PayMethodFragment()).commit();
                 break;
             case R.id.rewards:
                 break;

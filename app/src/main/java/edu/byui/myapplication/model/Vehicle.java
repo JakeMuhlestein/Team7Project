@@ -3,6 +3,7 @@ package edu.byui.myapplication.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.TypeConverters;
 
 import java.sql.Date;
 
@@ -16,25 +17,25 @@ public class Vehicle extends Budget {
     // also an enum?
     private String model;
     // the whole date? why not just an int?
-    private Date year;
+    private int year;
     private int miles;
 
     // Couldn't this just be budget.name?
 //    @ColumnInfo(name = "nickname")
 //    private String nickname;
 
-    public Vehicle(String make, String model, Date year, int miles) {
+    public Vehicle(String make, String model, int year, int miles) {
         super();
         this.make = make;
         this.model = model;
         this.year = year;
         this.miles = miles;
         // if name hasn't been set in budget, then default to:
-        this.setName(make + ": " + model + " " + year.toString());
+        this.setName(make + ": " + model + " " + year);
     }
 
     @Ignore
-    public Vehicle(String make, String model, Date year, int miles, String name, double amount) {
+    public Vehicle(String make, String model, int year, int miles, String name, double amount) {
         super();
         this.setName(name);
         this.setAmount(amount);
@@ -69,11 +70,11 @@ public class Vehicle extends Budget {
         this.model = model;
     }
 
-    public Date getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(int year) {
         this.year = year;
     }
 

@@ -22,6 +22,8 @@ import java.util.List;
 
 import edu.byui.myapplication.model.Budget;
 import edu.byui.myapplication.model.BudgetDao;
+import edu.byui.myapplication.model.PayMethod;
+import edu.byui.myapplication.model.PayMethodDao;
 import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
@@ -34,6 +36,7 @@ public class DatabaseTester {
     private UserDao userDao;
     private BudgetDao budgetDao;
     private VehicleDao vehicleDao;
+    private PayMethodDao payMethodDao;
     private TeamDatabase db;
     private final String TAG = "DatabaseTester";
 
@@ -44,6 +47,8 @@ public class DatabaseTester {
         userDao = db.getUserDao();
         budgetDao = db.getBudgetDao();
         vehicleDao = db.getVehicleDao();
+        payMethodDao = db.getPayMethodDao();
+
     }
 
     @After
@@ -83,6 +88,25 @@ public class DatabaseTester {
         Log.d(TAG, "user from database:" + byName.get(0).toString());
         assert(byName.get(0).getUsername().contentEquals(user.getUsername()));
 
+    }
+
+    @Test
+    public void testPayMethodRewardsType() throws Exception {
+        PayMethod payMethod = new PayMethod("Discover Rewards", "55577t7", 3100.00, 6200);
+        payMethod.setRewardsType(PayMethod.RewardsType.MILES);
+        Log.d(TAG, "***payMethod: inserting payMethod into db: " + payMethod.toString());
+        payMethodDao.insertPayMethod(payMethod);
+        List<PayMethod> payMethods = payMethodDao.getAllPaymentMethods().getValue();
+        int i = 0;
+        if(payMethods != null && payMethods.size() > 0) {
+            for (PayMethod pm : payMethods
+            ) {
+                Log.d(TAG, "payMethod " + i++ + ": " + pm.toString());
+            }
+            assert (payMethods.get(0).getRewardsType() == PayMethod.RewardsType.MILES);
+        } else {
+            fail();
+        }
     }
 
     @Test
@@ -137,5 +161,4 @@ public class DatabaseTester {
 
 
     }
-
 }

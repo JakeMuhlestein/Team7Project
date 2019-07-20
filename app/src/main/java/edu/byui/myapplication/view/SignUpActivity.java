@@ -23,7 +23,7 @@ import edu.byui.myapplication.model.UserDao;
 public class SignUpActivity extends AppCompatActivity {
     private EditText edtUsername;
     private EditText edtPassword;
-    private EditText edtComPassword;
+    //private EditText edtComPassword;
     private EditText edtEmail;
     private EditText edtFname;
     private EditText edtLname;
@@ -48,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         edtUsername = findViewById(R.id.usernameInput);
         edtPassword = findViewById(R.id.passwordInput);
-        edtComPassword = findViewById(R.id.compasswordInput);
+        //edtComPassword = findViewById(R.id.compasswordInput);
         edtEmail = findViewById(R.id.emailInput);
         edtFname = findViewById(R.id.fnameInput);
         edtLname= findViewById(R.id.lnameInput);
@@ -80,15 +80,15 @@ public class SignUpActivity extends AppCompatActivity {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            /*User user = new User(edtFname.getText().toString(),
+                            User user = new User(edtFname.getText().toString(),
                                     edtLname.getText().toString(),
                                     edtEmail.getText().toString(),
                                     edtPassword.getText().toString(),
-                                    edtComPassword.getText().toString(),
+                                    //edtComPassword.getText().toString(),
                                     edtUsername.getText().toString());
                             userDao.insert(user);
                             progressDialog.dismiss();
-                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));*/
+                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                         }
                     }, 1000);
 
@@ -103,8 +103,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     private boolean isEmpty(){
         if (TextUtils.isEmpty(edtFname.getText().toString()) || TextUtils.isEmpty(edtLname.getText().toString()) ||
-                TextUtils.isEmpty(edtEmail.getText().toString()) || TextUtils.isEmpty(edtPassword.getText().toString()) || TextUtils.isEmpty(edtComPassword.getText().toString())
-        || TextUtils.isEmpty(edtUsername.getText().toString())){
+                TextUtils.isEmpty(edtEmail.getText().toString()) || TextUtils.isEmpty(edtPassword.getText().toString()) || /*TextUtils.isEmpty(edtComPassword.getText().toString())
+        ||*/ TextUtils.isEmpty(edtUsername.getText().toString())){
             return true;
         }else{
             return false;

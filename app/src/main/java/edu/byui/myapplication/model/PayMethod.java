@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 import java.sql.Date;
 
@@ -21,11 +22,44 @@ public class PayMethod {
     Date expDate;
     double points;
 
+    // reward types: miles(1), cashback(2), hotel(3), none(0).
+    @ColumnInfo(name = "rewards_type")
+    @TypeConverters(PayMethodRewardTypeConverter.class)
+    RewardsType rewardsType;
+
+    public enum RewardsType {
+        MILES(1),
+        CASHBACK(2),
+        HOTEL(3),
+        NONE(0);
+
+        private int code;
+
+        RewardsType(int code) {
+            this.code = code;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+
+    }
+    public PayMethod(String payType, String acctNumber, double balance, double points, Date expDate) {
+        this.payType = payType;
+        this.acctNumber = acctNumber;
+        this.balance = balance;
+        this.points = points;
+        this.expDate = expDate;
+    }
+
+
     public PayMethod(String payType, String acctNumber, double balance, double points) {
         this.payType = payType;
         this.acctNumber = acctNumber;
         this.balance = balance;
         this.points = points;
+        this.rewardsType = RewardsType.NONE;
     }
 
     public int getId() {
@@ -64,7 +98,26 @@ public class PayMethod {
         balance += points;
     }
 
+    public RewardsType getRewardsType() {
+        return rewardsType;
+    }
 
+    public void setRewardsType(RewardsType rewardsType) {
+        this.rewardsType = rewardsType;
+    }
+
+    @Override
+    public String toString() {
+        return "PayMethod{" +
+                "id=" + id +
+                ", payType='" + payType + '\'' +
+                ", acctNumber='" + acctNumber + '\'' +
+                ", balance=" + balance +
+                ", expDate=" + expDate +
+                ", points=" + points +
+                ", rewardsType=" + rewardsType +
+                '}';
+    }
 
     @Ignore
     public PayMethod() {
@@ -76,5 +129,10 @@ public class PayMethod {
 //    @Ignore
 //    PayMethod(Date expDate) {
 //       this.expDate = expDate;
+//    }
+
+
+//    public class PayMethodRewardsType {
+//        enum
 //    }
 }

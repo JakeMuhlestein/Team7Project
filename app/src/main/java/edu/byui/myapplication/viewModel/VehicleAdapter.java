@@ -1,5 +1,6 @@
 package edu.byui.myapplication.viewModel;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,10 @@ import java.util.List;
 import edu.byui.myapplication.R;
 import edu.byui.myapplication.model.Vehicle;
 
-public class VehicleAdapter extends androidx.recyclerview.widget.RecyclerView.Adapter<VehicleAdapter.VehicleHolder> {
-
+public class VehicleAdapter extends RecyclerView.Adapter<VehicleAdapter.VehicleHolder> {
+    private final static String TAG = "** ** VehicleAdapter: ";
     private List<Vehicle> vehicles = new ArrayList<>();
-    private OnItemClickListener listener;
+    private VehicleAdapter.OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -32,6 +33,7 @@ public class VehicleAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
     public void onBindViewHolder(@NonNull VehicleHolder holder, int position) {
         Vehicle currentVehicle = vehicles.get(position);
         holder.vehicleName.setText(currentVehicle.getName());
+        holder.vehicleAmount.setText(String.valueOf(currentVehicle.getAmount()));
     }
 
     @Override
@@ -48,16 +50,21 @@ public class VehicleAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
     // inner class which the enclosing class extends ? a little chicken and egg thing going on here.
     class VehicleHolder extends RecyclerView.ViewHolder {
         private TextView vehicleName;
+        private TextView vehicleAmount;
 
-        VehicleHolder(@NonNull View vehicleView) {
+        public VehicleHolder(@NonNull View vehicleView) {
             super(vehicleView);
             // this is where the vehicle assignment happens.
-            vehicleName = vehicleView.findViewById(R.id.vehicleName);
+            vehicleName = vehicleView.findViewById(R.id.recycler_view_vehicle_name);
+            vehicleAmount = vehicleView.findViewById(R.id.amount);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
+            vehicleView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
+                    Log.d(TAG, "vehicleView.setOnClickListener: onClick has been fired! Position is "
+                            + position);
+                    // at this point i think listener is always set to null. Why?
                     if (listener != null && position != RecyclerView.NO_POSITION) {
                         listener.onItemClick(vehicles.get(position));
                     }
@@ -72,7 +79,12 @@ public class VehicleAdapter extends androidx.recyclerview.widget.RecyclerView.Ad
         void onItemClick(Vehicle vehicle);
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    /**
+     * Arg!
+     * @param listener
+     */
+    public void setOnItemClickListener(VehicleAdapter.OnItemClickListener listener) {
+        
         this.listener = listener;
     }
 
