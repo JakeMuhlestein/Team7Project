@@ -15,7 +15,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp">
 
@@ -26,17 +25,33 @@
                 android:backgroundTint="@color/colorWhite"
                 android:fontFamily="sans-serif-light"
                 android:hint="Username"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/disnameInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/colorWhite"
+                android:fontFamily="sans-serif-light"
+                android:layout_below="@id/usernameInput"
+                android:hint="Display Name"
                 android:inputType="text"
                 android:imeOptions="actionNext"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
+
             <EditText
                 android:id="@+id/passwordInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/usernameInput"
-                android:layout_marginTop="30dp"
+                android:layout_below="@id/disnameInput"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/colorWhite"
                 android:fontFamily="sans-serif-light"
                 android:hint="Password"
@@ -44,14 +59,14 @@
                 android:imeOptions="actionNext"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
 
             <EditText
                 android:id="@+id/emailInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/passwordInput"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/colorWhite"
                 android:fontFamily="sans-serif-light"
                 android:hint="Email"
@@ -59,65 +74,78 @@
                 android:imeOptions="actionNext"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
+
+
 
             <EditText
-                android:id="@+id/fnameInput"
+                android:id="@+id/phoneInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/emailInput"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/colorWhite"
                 android:fontFamily="sans-serif-light"
-                android:hint="First Name"
-                android:inputType="text"
+                android:hint="Phone"
+                android:inputType="phone"
                 android:imeOptions="actionNext"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
+
             <EditText
-                android:id="@+id/lnameInput"
+                android:id="@+id/addressInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/fnameInput"
-                android:layout_marginTop="30dp"
+                android:layout_below="@id/phoneInput"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/colorWhite"
                 android:fontFamily="sans-serif-light"
-                android:hint="Last Name"
+                android:hint="Address"
+                android:inputType="textPostalAddress"
+                android:imeOptions="actionNext"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"
-                android:textSize="17sp" />
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/bdayInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/addressInput"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/colorWhite"
+                android:fontFamily="sans-serif-light"
+                android:hint="Birthdat"
+                android:inputType="date"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="15sp" />
 
 
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="191dp"
-            android:layout_height="84dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:src="@drawable/logo" />
 
         <Button
             android:id="@+id/submitReg"
-            android:layout_width="284dp"
-            android:layout_height="wrap_content"
+            android:layout_width="350dp"
+            android:layout_height="36dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="95dp"
             android:background="@drawable/button_white"
             android:text="Submit"
             android:textColor="@color/colorPrimary" />
 
         <Button
             android:id="@+id/cancelReg"
-            android:layout_width="288dp"
-            android:layout_height="wrap_content"
+            android:layout_width="348dp"
+            android:layout_height="31dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="33dp"
             android:background="@drawable/button_red"
             android:text="Cancel"
             android:textColor="@color/colorWhite" />

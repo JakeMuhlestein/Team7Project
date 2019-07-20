@@ -23,6 +23,8 @@ public class PayMethodRewardTypeConverter {
         }
     }
 
+
+
     @TypeConverter
     public static int toInt(PayMethod.RewardsType type) {
         return type.getCode();

@@ -79,13 +79,13 @@ public abstract class TeamDatabase extends RoomDatabase {
      *
      */
     public static TeamDatabase getInstance(Context context) {
-        Log.i(TAG,"Getting instance");
+        Log.i(TAG,"Geting instance");
         synchronized (sLock) {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         TeamDatabase.class, "Team.db")
                         .fallbackToDestructiveMigration()   // This deletes all the data when the database changes.
-                        .addCallback(roomCallback)
+                        //.addCallback(roomCallback)
                         .build();
             }
             return INSTANCE;
@@ -96,7 +96,7 @@ public abstract class TeamDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) { //if the database is not created
             super.onCreate(db);
-            new PopulateDBAsyncTask(INSTANCE).execute();
+            //new PopulateDBAsyncTask(INSTANCE).execute();
         }
 
         @Override
@@ -122,7 +122,6 @@ public abstract class TeamDatabase extends RoomDatabase {
             payMethod = db.getPayMethodDao();
             budget = db.getBudgetDao();
         }
-
         @Override
         protected Void doInBackground(Void... voids) {
             Log.i(TAG,"Executing background");
@@ -147,10 +146,10 @@ public abstract class TeamDatabase extends RoomDatabase {
         private void createStubUsers() {
             user.insert(new User("dongvt",
                                  "Govert",
+                                 "123",
                                  "email@email.com",
-                                 "5555555",
-                                 "av siempre viva",
-                                 "123"
+                                 "11111",
+                                "somewhere"
                         ));
         }
 
