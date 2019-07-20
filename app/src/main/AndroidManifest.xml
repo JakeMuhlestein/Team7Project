@@ -24,7 +24,7 @@
             android:name=".viewModel.AddVendorActivity"
             android:parentActivityName=".view.MenuActivity" />
         <activity
-            android:name=".viewModel.AddVehicleActivity"
+            android:name=".viewModel.AddEditVehicleActivity"
             android:parentActivityName=".viewModel.VehicleActivity" />
         <activity
             android:name=".MainActivity"
