@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setProgress(0);
 
-        database = Room.databaseBuilder(this, TeamDatabase.class, "mi-database.db")
+        database = Room.databaseBuilder(this, TeamDatabase.class, "Team.db")
                 .allowMainThreadQueries()
                 .build();
         userDao = database.getUserDao();
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                             User user = userDao.getUser(edtUsername.getText().toString(), edtPassword.getText().toString());
                             if(user!=null){
                                 Intent i = new Intent(MainActivity.this, MenuActivity.class);
-                                i.putExtra("User", (Parcelable) user);
+                                //i.putExtra("User", (Parcelable) user);
                                 startActivity(i);
                                 finish();
                             }else{
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO: onResume needs to include a call to DataRepository's doNothing() method
 
     private boolean emptyValidation() {
-        if (TextUtils.isEmpty(edtUsername.getText().toString()) || TextUtils.isEmpty(edtPassword.getText().toString())){
+        if (TextUtils.isEmpty(edtUsername.getText().toString()) /*|| TextUtils.isEmpty(edtPassword.getText().toString())*/){
             return true;
         } else {
             return false;
