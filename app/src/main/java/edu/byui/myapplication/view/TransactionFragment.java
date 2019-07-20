@@ -77,7 +77,8 @@ public class TransactionFragment extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-                Toast.makeText(getActivity(), (int) viewHolder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                int uniqueID = viewHolder.getAdapterPosition();
+                Toast.makeText(getActivity(), uniqueID, Toast.LENGTH_SHORT).show();
 
                 transactionViewModel.delete(adapter.getTransactionAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(getActivity(), "Transaction Deleted", Toast.LENGTH_SHORT).show();

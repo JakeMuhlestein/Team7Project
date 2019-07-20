@@ -95,7 +95,8 @@ public class AddEditBudgetActivity extends AppCompatActivity {
                 saveBudget();
                 return true;
             default:
-                return super.onOptionsItemSelected(item);
+                finish();
+                return true;
         }
 
     }
