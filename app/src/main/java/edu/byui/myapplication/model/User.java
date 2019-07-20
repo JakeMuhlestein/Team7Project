@@ -36,12 +36,14 @@ public class User {
                 String displayName,
                 String email,
                 String phone,
-                String address) {
+                String address,
+                String password) {
         this.username = username;
         this.displayName = displayName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.password = password;
     }
 
     public int getUserID() { return userID; }

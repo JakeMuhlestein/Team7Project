@@ -148,7 +148,8 @@ public abstract class TeamDatabase extends RoomDatabase {
                                  "Govert",
                                  "email@email.com",
                                  "5555555",
-                                 "av siempre viva"
+                                 "av siempre viva",
+                                "123"
                         ));
         }
 
