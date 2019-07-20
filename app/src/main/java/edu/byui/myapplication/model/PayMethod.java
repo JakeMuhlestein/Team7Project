@@ -90,7 +90,26 @@ public class PayMethod {
         balance += points;
     }
 
+    public RewardsType getRewardsType() {
+        return rewardsType;
+    }
 
+    public void setRewardsType(RewardsType rewardsType) {
+        this.rewardsType = rewardsType;
+    }
+
+    @Override
+    public String toString() {
+        return "PayMethod{" +
+                "id=" + id +
+                ", payType='" + payType + '\'' +
+                ", acctNumber='" + acctNumber + '\'' +
+                ", balance=" + balance +
+                ", expDate=" + expDate +
+                ", points=" + points +
+                ", rewardsType=" + rewardsType +
+                '}';
+    }
 
     @Ignore
     public PayMethod() {
