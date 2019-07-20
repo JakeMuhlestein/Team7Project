@@ -24,25 +24,13 @@ public class DateTypeConverter {
     }
 
     @TypeConverter
-    public static Date toDate(int year) {
-        Calendar calYear = new GregorianCalendar(year, 1, 1);
-        return new Date(calYear.getTimeInMillis());
+    public static java.sql.Date toSqlDate(java.util.Date utilDate) {
+        return utilDate == null ? null : new java.sql.Date(utilDate.getTime());
     }
 
     @TypeConverter
-    public static int toInt(Date date) {
-        return date.getYear();
-    }
-
-    @TypeConverter
-    public static Integer toInteger(Date date) {
-        return date.getYear();
-    }
-
-    @TypeConverter
-    public static Date toDate(Integer year) {
-        Calendar calYear = new GregorianCalendar(year, 1, 1);
-        return new Date(calYear.getTimeInMillis());
+    public static java.util.Date toUtilDate(java.sql.Date sqlDate) {
+        return sqlDate == null ? null : new java.util.Date(sqlDate.getTime());
     }
 
 

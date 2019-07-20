@@ -121,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
         //startActivityForResult(intent, 1);
 
         // for Stetho - Facebook's db tool
-        //Stetho.initializeWithDefaults(this);
-        // right now we need DataRepository for Stetho
-        //DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
+        Stetho.initializeWithDefaults(this);
+        //right now we need DataRepository for Stetho
+        DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
         
     }
 

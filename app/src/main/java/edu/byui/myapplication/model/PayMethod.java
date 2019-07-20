@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 
 import java.sql.Date;
@@ -18,8 +19,11 @@ public class PayMethod {
     @ColumnInfo(name = "acct_number")
     String acctNumber;
     double balance;
-    @Ignore
+
+    @ColumnInfo(name = "exp_date")
+    @TypeConverters(DateTypeConverter.class)
     Date expDate;
+
     double points;
 
     // reward types: miles(1), cashback(2), hotel(3), none(0).
@@ -51,9 +55,11 @@ public class PayMethod {
         this.balance = balance;
         this.points = points;
         this.expDate = expDate;
+        this.rewardsType = RewardsType.NONE;
     }
 
 
+    @Ignore
     public PayMethod(String payType, String acctNumber, double balance, double points) {
         this.payType = payType;
         this.acctNumber = acctNumber;

@@ -25,7 +25,7 @@
             android:parentActivityName=".view.MenuActivity" />
         <activity
             android:name=".viewModel.AddEditVehicleActivity"
-            android:parentActivityName=".viewModel.VehicleActivity" />
+            android:parentActivityName=".view.MenuActivity" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop">

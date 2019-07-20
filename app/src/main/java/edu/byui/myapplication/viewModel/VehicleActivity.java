@@ -98,6 +98,7 @@ public class VehicleActivity extends AppCompatActivity  {
             // for the Year date
             //Calendar calYear = new GregorianCalendar(vehicleYear, 1, 1);
 
+
             Vehicle vehicle = new Vehicle(vehicleMake, vehicleModel, vehicleYear, vehicleMileage, vehicleName, vehicleAmount);
             vehicleViewModel.insertVehicle(vehicle);
 
