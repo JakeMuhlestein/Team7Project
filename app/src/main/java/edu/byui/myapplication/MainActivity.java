@@ -3,15 +3,20 @@ package edu.byui.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.room.Room;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Parcelable;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.facebook.stetho.Stetho;
 
@@ -20,6 +25,7 @@ import java.util.List;
 import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
+import edu.byui.myapplication.view.SignUpActivity;
 import edu.byui.myapplication.view.MenuActivity;
 import edu.byui.myapplication.viewModel.UserViewModel;
 
@@ -46,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /*progressDialog = new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Login...");
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -95,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Empty Fields", Toast.LENGTH_SHORT).show();
                 }
             }
-        });*/
+        });
 
         /*
         SharedPreferences sharedPreferences =
