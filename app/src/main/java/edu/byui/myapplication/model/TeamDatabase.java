@@ -85,7 +85,8 @@ public abstract class TeamDatabase extends RoomDatabase {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         TeamDatabase.class, "Team.db")
                         .fallbackToDestructiveMigration()   // This deletes all the data when the database changes.
-                        //.addCallback(roomCallback)
+                        .allowMainThreadQueries()
+                        .addCallback(roomCallback)
                         .build();
             }
             return INSTANCE;
@@ -96,7 +97,7 @@ public abstract class TeamDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) { //if the database is not created
             super.onCreate(db);
-            //new PopulateDBAsyncTask(INSTANCE).execute();
+            new PopulateDBAsyncTask(INSTANCE).execute();
         }
 
         @Override
@@ -154,9 +155,9 @@ public abstract class TeamDatabase extends RoomDatabase {
         }
 
         private void createStubPayMethods() {
-            payMethod.insertPayMethod(new PayMethod("Cash","Number555",555555,60000));
-            payMethod.insertPayMethod(new PayMethod("Credit","84728727",88888,10000));
-            payMethod.insertPayMethod(new PayMethod("Card","272975",9999,20000));
+            payMethod.insertPayMethod(new PayMethod("Cash","Number555",555555,60000,new Date(900000)));
+            payMethod.insertPayMethod(new PayMethod("Credit","84728727",88888,10000,new Date(900000)));
+            payMethod.insertPayMethod(new PayMethod("Card","272975",9999,20000,new Date(900000)));
         }
 
         private void createStubBudgets() {

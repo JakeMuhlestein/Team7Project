@@ -58,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setProgress(0);
 
-        database = Room.databaseBuilder(this, TeamDatabase.class, "Team.db")
+        /*database = Room.databaseBuilder(this, TeamDatabase.class, "Team.db")
                 .allowMainThreadQueries()
-                .build();
+                .build();*/
+        database = TeamDatabase.getInstance(this);
         userDao = database.getUserDao();
 
         btLogin = findViewById(R.id.login);
