@@ -27,7 +27,7 @@ public class User {
     // The following @ignore needs to be here for ROOM. It's telling the database not to instantiate
     // using this constructor.
     @Ignore
-    public User(String s, String toString, String string, String s1, String toString1, String string1, String s2) {
+    public User(String s, String toString, String string, String s1, String toString1, String string1) {
 
     }
     // This will be the constructor ROOM uses. If any other constructors are created that use a non
@@ -37,13 +37,15 @@ public class User {
                 String password,
                 String email,
                 String phone,
-                String address) {
+                String address,
+                String bday) {
         this.username = username;
         this.displayName = displayName;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.bday = bday;
 
     }
 

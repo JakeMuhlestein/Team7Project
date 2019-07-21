@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        database = TeamDatabase.getInstance(this);
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -58,10 +60,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setProgress(0);
 
-        /*database = Room.databaseBuilder(this, TeamDatabase.class, "Team.db")
-                .allowMainThreadQueries()
-                .build();*/
-        database = TeamDatabase.getInstance(this);
+
         userDao = database.getUserDao();
 
         btLogin = findViewById(R.id.login);
@@ -97,29 +96,11 @@ public class MainActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                         }
                     }, 1000);
-
                 }else{
                     Toast.makeText(MainActivity.this, "Empty Fields", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-        /*
-        SharedPreferences sharedPreferences =
-                getSharedPreferences(USER_PREFERENCES_KEY, Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        userViewModel.getAllUsers().observe(this, new Observer<List<User>>() {
-            @Override
-            public void onChanged(List<User> users) {
-                editor.putString(USER_KEY, String.valueOf(users.get(0).getUserID()));
-            }
-        });
-        */
-
-        //Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-        //startActivityForResult(intent, 1);
 
         // for Stetho - Facebook's db tool
         Stetho.initializeWithDefaults(this);

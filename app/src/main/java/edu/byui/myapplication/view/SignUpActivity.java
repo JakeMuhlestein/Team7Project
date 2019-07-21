@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.room.Room;
 
 import edu.byui.myapplication.MainActivity;
@@ -19,6 +20,7 @@ import edu.byui.myapplication.R;
 import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
+import edu.byui.myapplication.viewModel.UserViewModel;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText edtUsername;
@@ -35,6 +37,8 @@ public class SignUpActivity extends AppCompatActivity {
     private Button btRRegister;
 
     private ProgressDialog progressDialog;
+
+    private UserViewModel userViewModel;
 
     private UserDao userDao;
 
@@ -55,17 +59,13 @@ public class SignUpActivity extends AppCompatActivity {
         //edtComPassword = findViewById(R.id.compasswordInput);
         edtEmail = findViewById(R.id.emailInput);
         edtPhone = findViewById(R.id.phoneInput);
-        edtAddress = findViewById(R.id.bdayInput);
+        edtAddress = findViewById(R.id.addressInput);
         edtBday = findViewById(R.id.bdayInput);
 
         btRCancel = findViewById(R.id.cancelReg);
         btRRegister = findViewById(R.id.submitReg);
 
-        userDao = Room.databaseBuilder(this, TeamDatabase.class, "mi-database.db")
-                .allowMainThreadQueries()
-                .build()
-                .getUserDao();
-
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         btRCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,24 +76,26 @@ public class SignUpActivity extends AppCompatActivity {
         });
 
         btRRegister.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 if (!isEmpty()) {
-
                     progressDialog.show();
 
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            User user = new User(
+                             User user = new User(
                                     edtUsername.getText().toString(),
                                     edtDisplayname.getText().toString(),
                                     edtPassword.getText().toString(),
                                     edtEmail.getText().toString(),
                                     edtPhone.getText().toString(),
                                     edtAddress.getText().toString(),
-                                    edtBday.getText().toString());
-                            userDao.insert(user);
+                                    edtBday.getText().toString()
+                            );
+
+                            userViewModel.insert(user);
                             progressDialog.dismiss();
                             startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                         }
@@ -104,14 +106,16 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private boolean isEmpty(){
-        if (TextUtils.isEmpty(edtPhone.getText().toString()) || TextUtils.isEmpty(edtAddress.getText().toString()) ||
-                TextUtils.isEmpty(edtEmail.getText().toString()) || TextUtils.isEmpty(edtPassword.getText().toString()) || /*TextUtils.isEmpty(edtComPassword.getText().toString())
-        ||*/ TextUtils.isEmpty(edtUsername.getText().toString()) || TextUtils.isEmpty(edtDisplayname.getText().toString()) || TextUtils.isEmpty(edtBday.getText().toString())){
+        if (TextUtils.isEmpty(edtPhone.getText().toString()) ||
+                TextUtils.isEmpty(edtAddress.getText().toString()) ||
+                TextUtils.isEmpty(edtEmail.getText().toString()) ||
+                TextUtils.isEmpty(edtPassword.getText().toString()) ||
+                TextUtils.isEmpty(edtUsername.getText().toString()) ||
+                TextUtils.isEmpty(edtDisplayname.getText().toString()) ||
+                TextUtils.isEmpty(edtBday.getText().toString())){
             return true;
         }else{
             return false;
