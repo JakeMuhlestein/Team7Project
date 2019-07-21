@@ -12,32 +12,57 @@
         android:id="@+id/transaction_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
-        android:layout_marginTop="20dip"
         android:layout_marginLeft="8dip"
-        android:layout_marginRight="8dip"/>
+        android:layout_marginTop="20dip"
+        android:layout_marginRight="8dip"
+        android:hint="@string/transaction_date"
+        android:inputType="date" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="budget"
+        android:layout_marginTop="20dip"
+        android:textColor="@color/colorPrimary"
+        />
 
     <Spinner
         android:id="@+id/transaction_budget_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
+        android:layout_marginTop="5dip"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vendor"
+        android:layout_marginTop="20dip"
+        android:textColor="@color/colorPrimary"
+        />
 
     <Spinner
         android:id="@+id/transaction_vendor_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
+        android:layout_marginTop="5dip"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment Method"
+        android:layout_marginTop="20dip"
+        android:textColor="@color/colorPrimary"
+        />
 
     <Spinner
         android:id="@+id/transaction_pay_method_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dip"
+        android:layout_marginTop="5dip"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"/>
 
@@ -45,20 +70,21 @@
         android:id="@+id/transaction_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:layout_marginTop="20dip"
         android:layout_marginLeft="8dip"
-        android:layout_marginRight="8dip"/>
+        android:layout_marginTop="20dip"
+        android:layout_marginRight="8dip"
+        android:hint="@string/transaction_amount"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/transaction_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textLongMessage"
-        android:layout_marginTop="20dip"
         android:layout_marginLeft="8dip"
+        android:layout_marginTop="20dip"
         android:layout_marginRight="8dip"
-        />
+        android:hint="@string/transaction_coments"
+        android:inputType="textLongMessage" />
 
 
 </LinearLayout>

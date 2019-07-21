@@ -23,7 +23,7 @@ public interface TransactionDao {
     @Query("SELECT * FROM [transaction]  WHERE id = :id")
     Transaction getTransaction(int id);
 
-    @Query("SELECT * FROM `transaction`")
+    @Query("SELECT * FROM `transaction` ORDER BY date DESC")
     LiveData<List<Transaction>> getAllTransactions();
 
     @Update
@@ -34,4 +34,9 @@ public interface TransactionDao {
 
     @Query("DELETE FROM `Transaction`")
     void deleteAll();
+
+    @Query("SELECT * FROM Vendor WHERE id = :vendorId")
+    List<Vendor> getVendorName(int vendorId);
+
+
 }

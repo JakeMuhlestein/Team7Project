@@ -80,11 +80,11 @@ public class AddEditTransactionActivity extends AppCompatActivity {
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
-
-
         if (intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Transaction");
-            date.setText(intent.getStringExtra(EXTRA_DATE));
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+
+            date.setText(format.format(intent.getSerializableExtra(EXTRA_DATE)));
             amount.setText(String.format(Locale.getDefault(),"%.2f", (intent.getDoubleExtra(EXTRA_AMOUNT, 0.00))));
             comment.setText(intent.getStringExtra(EXTRA_COMMENT));
         } else {
@@ -109,7 +109,6 @@ public class AddEditTransactionActivity extends AppCompatActivity {
             default:
                 finish();
                 return true;
-            /*super.onOptionsItemSelected(item);*/
         }
     }
 

@@ -13,9 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.byui.myapplication.R;
+import edu.byui.myapplication.model.TeamDatabase;
 import edu.byui.myapplication.model.Transaction;
+import edu.byui.myapplication.model.TransactionDao;
+import edu.byui.myapplication.model.Vendor;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionHolder> {
+
+    TransactionDao transactionDao;
 
     private List<Transaction> transactionList = new ArrayList<>();
     private OnItemClickListener listener;
@@ -25,18 +30,30 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public TransactionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.transaction_item, parent, false);
+
+        transactionDao = TeamDatabase.getInstance(itemView.getContext()).getTransactionDao();
+
         return new TransactionHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TransactionHolder holder, int position) {
-        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+    public void onBindViewHolder(@NonNull final TransactionHolder holder, final int position) {
 
-        Transaction currentTransaction = transactionList.get(position);
 
-        holder.transactionAmount.setText(String.valueOf(currentTransaction.getAmount()));
-        holder.transactionDate.setText(format.format(currentTransaction.getDate()));
-        holder.transactionVendorName.setText(String.valueOf(currentTransaction.getVendorId()));
+        final List<Vendor>[] vendorList = new List[1];
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+
+                Transaction currentTransaction = transactionList.get(position);
+                vendorList[0] = transactionDao.getVendorName(currentTransaction.getVendorId());
+                holder.transactionVendorName.setText(vendorList[0].get(0).getName());
+                holder.transactionAmount.setText(String.valueOf(currentTransaction.getAmount()));
+                holder.transactionDate.setText(format.format(currentTransaction.getDate()));
+            }
+        }).start();
+
     }
 
     @Override

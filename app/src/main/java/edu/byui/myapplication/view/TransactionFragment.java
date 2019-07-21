@@ -92,7 +92,7 @@ public class TransactionFragment extends Fragment {
             public void onItemClick(Transaction transaction) {
                 Intent intent = new Intent(getActivity(), AddEditTransactionActivity.class);
 
-                intent.putExtra(AddEditTransactionActivity.EXTRA_ID,transaction.getUserId());
+                intent.putExtra(AddEditTransactionActivity.EXTRA_ID,transaction.getId());
                 intent.putExtra(AddEditTransactionActivity.EXTRA_AMOUNT,transaction.getAmount());
                 intent.putExtra(AddEditTransactionActivity.EXTRA_COMMENT,transaction.getNotes());
                 intent.putExtra(AddEditTransactionActivity.EXTRA_DATE,transaction.getDate());

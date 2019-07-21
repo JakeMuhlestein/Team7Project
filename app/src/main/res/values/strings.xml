@@ -5,7 +5,7 @@
     <string name="vehicle_summary">Vehicle Summary</string>
     <string name="menu_title">Main Menu</string>
     <string name="transaction_title">Main Menu</string>
-    <string name="transaction_date">Date</string>
+    <string name="transaction_date">Date MM/DD/YYYY</string>
     <string name="transaction_budget">Budget Category</string>
     <string name="transaction_vendor">Vendor</string>
     <string name="transaction_payMethod">Payment Method</string>
