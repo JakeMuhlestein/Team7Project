@@ -48,6 +48,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
+        if(savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new TransactionFragment()).commit();
+        }
+
+
     }
 
     @Override
