@@ -13,17 +13,24 @@
         <item android:id="@+id/credit_card"
             android:icon="@drawable/ic_credit_card"
             android:title="Credit Cards"/>
-        <item android:id="@+id/rewards"
-            android:icon="@drawable/ic_rewards"
-            android:title="Rewards"/>
         <item android:id="@+id/budgets"
             android:icon="@drawable/ic_budgets"
             android:title="Budgets"/>
         <item android:id="@+id/vehicle"
             android:icon="@drawable/ic_vehicle"
             android:title="Vehicle"/>
-
-
     </group>
+
+    <item android:title="Session">
+        <menu>
+            <item android:id="@+id/logout"
+                android:icon="@drawable/ic_logout"
+                android:title="Logout"/>
+
+            <item android:id="@+id/User"
+                android:icon="@drawable/ic_user"
+                android:title="User"/>
+        </menu>
+    </item>
 
 </menu>
