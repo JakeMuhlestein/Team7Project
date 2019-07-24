@@ -27,6 +27,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import edu.byui.myapplication.R;
 import edu.byui.myapplication.model.Transaction;
@@ -121,6 +122,8 @@ public class TransactionFragment extends Fragment {
             String sDate    = data.getStringExtra(AddEditTransactionActivity.EXTRA_DATE);
             String sUser    = sharedPreferences.getString(USER_KEY,"dongvt");
 
+            double dAmount = Double.parseDouble(sAmount);
+
             int iVendor  = data.getIntExtra(AddEditTransactionActivity.EXTRA_VENDOR,-1);
             int iBudget  = data.getIntExtra(AddEditTransactionActivity.EXTRA_BUDGET,-1);
             int iPayment = data.getIntExtra(AddEditTransactionActivity.EXTRA_PAYMENT,-1);
@@ -133,7 +136,7 @@ public class TransactionFragment extends Fragment {
                     iVendor,
                     iPayment,
                     iBudget,
-                    Double.parseDouble(sAmount),
+                    dAmount,
                     sComment);
             transactionViewModel.insert(newTransaction);
 
@@ -151,6 +154,8 @@ public class TransactionFragment extends Fragment {
             String sComment = data.getStringExtra(AddEditTransactionActivity.EXTRA_COMMENT);
             String sDate    = data.getStringExtra(AddEditTransactionActivity.EXTRA_DATE);
 
+            double dAmount = Double.parseDouble(sAmount);
+
             int iVendor  = data.getIntExtra(AddEditTransactionActivity.EXTRA_VENDOR,-1);
             int iBudget  = data.getIntExtra(AddEditTransactionActivity.EXTRA_BUDGET,-1);
             int iPayment = data.getIntExtra(AddEditTransactionActivity.EXTRA_PAYMENT,-1);
@@ -163,7 +168,7 @@ public class TransactionFragment extends Fragment {
                     iVendor,
                     iPayment,
                     iBudget,
-                    Double.parseDouble(sAmount),
+                    dAmount,
                     sComment);
             transaction.setId(id);
 

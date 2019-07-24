@@ -1,5 +1,6 @@
 package edu.byui.myapplication.viewModel;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,19 +41,19 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull final TransactionHolder holder, final int position) {
 
 
-        final List<Vendor>[] vendorList = new List[1];
-        new Thread(new Runnable() {
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-
+                List<Vendor> vendorList;
                 Transaction currentTransaction = transactionList.get(position);
-                vendorList[0] = transactionDao.getVendorName(currentTransaction.getVendorId());
-                holder.transactionVendorName.setText(vendorList[0].get(0).getName());
+                vendorList = transactionDao.getVendorName(currentTransaction.getVendorId());
+                holder.transactionVendorName.setText(vendorList.get(0).getName());
                 holder.transactionAmount.setText(String.valueOf(currentTransaction.getAmount()));
-                holder.transactionDate.setText(format.format(currentTransaction.getDate()));
+                if (currentTransaction.getDate() != null)
+                    holder.transactionDate.setText(format.format(currentTransaction.getDate()));
             }
-        }).start();
+        },500);
 
     }
 

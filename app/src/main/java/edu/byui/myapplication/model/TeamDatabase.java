@@ -103,7 +103,7 @@ public abstract class TeamDatabase extends RoomDatabase {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {//if the database is created
             super.onOpen(db);
-            //new PopulateDBAsyncTask(INSTANCE).execute();
+            new PopulateDBAsyncTask(INSTANCE).execute();
         }
     };
 
@@ -150,7 +150,8 @@ public abstract class TeamDatabase extends RoomDatabase {
                                  "123",
                                  "email@email.com",
                                  "11111",
-                                "somewhere"
+                                 "somewhere",
+                                 "52365"
                         ));
         }
 

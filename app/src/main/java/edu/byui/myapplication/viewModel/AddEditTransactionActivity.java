@@ -139,7 +139,7 @@ public class AddEditTransactionActivity extends AppCompatActivity {
 
         Intent data = new Intent();
         data.putExtra(EXTRA_COMMENT, sComment);
-        data.putExtra(EXTRA_AMOUNT, String.format(Locale.getDefault(), "%.2f", Double.parseDouble(sAmount)));
+        data.putExtra(EXTRA_AMOUNT, sAmount);
         data.putExtra(EXTRA_DATE, sDate);
 
         data.putExtra(EXTRA_VENDOR, iVendor);

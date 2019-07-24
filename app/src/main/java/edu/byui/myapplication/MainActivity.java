@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,18 +84,18 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             User user = userDao.getUser(edtUsername.getText().toString(), edtPassword.getText().toString());
-                            if(user!=null){
+                            if (user != null) {
                                 Intent i = new Intent(MainActivity.this, MenuActivity.class);
                                 //i.putExtra("User", (Parcelable) user);
                                 startActivity(i);
                                 finish();
-                            }else{
+                            } else {
                                 Toast.makeText(MainActivity.this, "Unregistered user, or incorrect", Toast.LENGTH_SHORT).show();
                             }
                             progressDialog.dismiss();
                         }
                     }, 1000);
-                }else{
+                } else {
                     Toast.makeText(MainActivity.this, "Empty Fields", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -106,13 +105,13 @@ public class MainActivity extends AppCompatActivity {
         Stetho.initializeWithDefaults(this);
         //right now we need DataRepository for Stetho
         DataRepository.getInstance(TeamDatabase.getInstance(this)).doNothing();
-        
+
     }
 
     //TODO: onResume needs to include a call to DataRepository's doNothing() method
 
     private boolean emptyValidation() {
-        if (TextUtils.isEmpty(edtUsername.getText().toString()) /*|| TextUtils.isEmpty(edtPassword.getText().toString())*/){
+        if (TextUtils.isEmpty(edtUsername.getText().toString()) /*|| TextUtils.isEmpty(edtPassword.getText().toString())*/) {
             return true;
         } else {
             return false;
