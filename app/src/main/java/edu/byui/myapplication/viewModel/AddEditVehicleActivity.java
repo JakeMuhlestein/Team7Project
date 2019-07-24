@@ -119,14 +119,22 @@ public class AddEditVehicleActivity extends AppCompatActivity {
         }
 
         Intent data = new Intent();
-        data.putExtra(EXTRA_NAME,name);
-        data.putExtra(EXTRA_MAKE,make);
-        data.putExtra(EXTRA_MODEL,model);
-        data.putExtra(EXTRA_YEAR,year);
-        data.putExtra(EXTRA_MILEAGE,mileage);
+        data.putExtra(EXTRA_NAME, name);
+        data.putExtra(EXTRA_MAKE, make);
+        data.putExtra(EXTRA_MODEL, model);
+        data.putExtra(EXTRA_YEAR, year);
+        data.putExtra(EXTRA_MILEAGE, mileage);
         data.putExtra(EXTRA_AMOUNT, String.format(Locale.getDefault(), "%.2f", amount));
+        // deal with ID. If ID is not set, then the vehicle will not get updated.
+        // since it is not in the interface, pull it from the intent THAT WAS PASSED IN.
+        int id = getIntent().getIntExtra(EXTRA_ID, -1);
+        if (id != -1) {
+            // setting ID here as not too mess with a newly created vehicle.
+            data.putExtra(EXTRA_ID, id);
+        }
 
-        setResult(RESULT_OK,data);
+
+        setResult(RESULT_OK, data);
         finish();
     }
 

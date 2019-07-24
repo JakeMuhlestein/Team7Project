@@ -2,6 +2,7 @@ package edu.byui.myapplication.repositories;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -15,6 +16,7 @@ public class VehicleRepository {
 
     private VehicleDao dao;
     private LiveData<List<Vehicle>> allVehicles;
+    private static final String TAG = "VehicleRepository:";
 
     public VehicleRepository(Application application) {
         TeamDatabase teamDatabase = TeamDatabase.getInstance(application);
@@ -71,6 +73,7 @@ public class VehicleRepository {
 
         @Override
         protected Void doInBackground(Vehicle... vehicles) {
+            Log.d(TAG, "UpdateVehicleAsyncTask: calling dao.updateVehicle");
             dao.updateVehicle(vehicles[0]);
             // I guess this return statement is needed with the Void types?
             return null;

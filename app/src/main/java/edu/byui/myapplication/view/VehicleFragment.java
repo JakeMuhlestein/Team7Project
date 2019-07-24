@@ -84,7 +84,7 @@ public class VehicleFragment extends Fragment {
         adapter.setOnItemClickListener(new VehicleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Vehicle vehicle) {
-                Log.d(TAG, "adapter.setOnItemClickListener: onItemClick has been fired!");
+                Log.d(TAG, "adapter.setOnItemClickListener: onItemClick has been fired! \nVehicle:" + vehicle.toString());
                 Intent intent = new Intent(getActivity(), AddEditVehicleActivity.class);
 
                 intent.putExtra(AddEditVehicleActivity.EXTRA_ID, vehicle.getId());
@@ -94,6 +94,9 @@ public class VehicleFragment extends Fragment {
                 intent.putExtra(AddEditVehicleActivity.EXTRA_MODEL, vehicle.getModel());
                 intent.putExtra(AddEditVehicleActivity.EXTRA_YEAR, vehicle.getYear());
                 intent.putExtra(AddEditVehicleActivity.EXTRA_MILEAGE, vehicle.getMiles());
+
+                if(vehicle.getId() < 1)
+                    Log.d(TAG, "onItemClick: vehicle ID problem. \nVehicle: " + vehicle.toString());
 
                 startActivityForResult(intent, EDIT_VEHICLE_REQUEST);
 
@@ -114,7 +117,7 @@ public class VehicleFragment extends Fragment {
             int vehicleYear = data.getIntExtra(AddEditVehicleActivity.EXTRA_YEAR, 1999);
             int vehicleMileage = data.getIntExtra(AddEditVehicleActivity.EXTRA_MILEAGE, 0);
 
-            //verify
+            //verify this is coming across from parent class Budget.
             double vehicleAmount = Double.parseDouble(data.getStringExtra(AddEditVehicleActivity.EXTRA_AMOUNT));
                 //double vehicleAmount = data.getDoubleExtra(AddEditVehicleActivity.EXTRA_AMOUNT, 0.00);
 
@@ -140,7 +143,7 @@ public class VehicleFragment extends Fragment {
             int vehicleMileage = data.getIntExtra(AddEditVehicleActivity.EXTRA_MILEAGE, 0);
 
             //verify
-            double vehicleAmount = data.getDoubleExtra(AddEditVehicleActivity.EXTRA_AMOUNT, 0.00);
+            double vehicleAmount = Double.parseDouble(data.getStringExtra(AddEditVehicleActivity.EXTRA_AMOUNT));
 
             // for the Year date
             //Calendar calYear = new GregorianCalendar(vehicleYear, 1, 1);
