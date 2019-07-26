@@ -116,7 +116,7 @@
                 android:layout_marginTop="15dp"
                 android:backgroundTint="@color/colorWhite"
                 android:fontFamily="sans-serif-light"
-                android:hint="Birthdat"
+                android:hint="Birthdate"
                 android:inputType="date"
                 android:textColor="@color/colorWhite"
                 android:textColorHint="@color/colorWhite"

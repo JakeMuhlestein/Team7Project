@@ -13,6 +13,7 @@
     <string name="transaction_coments">Comments</string>
     <string name="total_string">Total: </string>
     <string name="no_expenses">No Expenses </string>
+    <string name="vehicle_header">Vehicle</string>
 
 
     <string-array name="rewardsCC">

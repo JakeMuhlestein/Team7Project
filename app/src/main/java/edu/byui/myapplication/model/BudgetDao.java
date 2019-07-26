@@ -44,6 +44,10 @@ public interface BudgetDao {
     @Query("SELECT * FROM budget WHERE name = :name")
     Budget getCategoryByName(String name);
 
+    @Query("SELECT * FROM budget WHERE id = :id")
+    List<Budget> getCategoryById(int id);
+
+
     /**
      * perhaps this conflict strategy should be abort?
      * @param budget

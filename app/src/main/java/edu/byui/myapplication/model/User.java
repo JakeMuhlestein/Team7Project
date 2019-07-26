@@ -30,6 +30,7 @@ public class User {
     public User(String s, String toString, String string, String s1, String toString1, String string1) {
 
     }
+
     // This will be the constructor ROOM uses. If any other constructors are created that use a non
     // primitive datatype other than String, it should include this @Ignore directive. MT.
     public User(String username,

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import java.util.Locale;
 
@@ -57,6 +58,9 @@ public class AddEditVehicleActivity extends AppCompatActivity {
 
         if(intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Vehicle");
+            vehicleName.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryMedium));
+            vehicleBudget.setTextColor(ContextCompat.getColor(this, R.color.colorPrimaryMedium));
+
             vehicleName.setText(intent.getStringExtra(EXTRA_NAME));
             vehicleMake.setText(intent.getStringExtra(EXTRA_MAKE));
             vehicleModel.setText(intent.getStringExtra(EXTRA_MODEL));

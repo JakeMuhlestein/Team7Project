@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
@@ -18,6 +19,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     //The drawer is the menu object itself
     private DrawerLayout drawer;
+    private static final String TAG = "MenuActivity: ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +81,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             case R.id.vehicle:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new VehicleFragment()).commit();
+                break;
+            case R.id.report:
+                Log.d(TAG, "OnNavigationItemSelected: report fired!");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ReportFragment()).commit();
                 break;
 
         }

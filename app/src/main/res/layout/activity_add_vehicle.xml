@@ -8,47 +8,54 @@
     android:padding="16dp"
     tools:context=".viewModel.AddEditVehicleActivity">
 
+
     <EditText
         android:id="@+id/edit_text_vehicle_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:hint="Vehicle Name"
-        android:inputType="text"/>
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edit_text_vehicle_make"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:hint="Vehicle Make"
-        android:inputType="text"/>
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edit_text_vehicle_model"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:hint="Vehicle Model"
-        android:inputType="text"/>
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edit_text_vehicle_mileage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Vehicle Mileage"
-        android:inputType="number"/>
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/edit_text_vehicle_year"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Vehicle Year"
-        android:inputType="number"/>
+        android:inputType="number" />
 
     <EditText
         android:id="@+id/edit_text_vehicle_budget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Vehicle Budget"
-        android:inputType="numberDecimal"/>
+        android:inputType="numberDecimal" />
 
 
 </LinearLayout>

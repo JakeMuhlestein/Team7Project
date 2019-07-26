@@ -44,10 +44,10 @@ import static edu.byui.myapplication.viewModel.VehicleActivity.EDIT_VEHICLE_REQU
  * create an instance of this fragment.
  */
 public class VehicleFragment extends Fragment {
-    private final String TAG = "** ** VehicleFragment: ";
     public static final int ADD_VEHICLE_REQUEST = 1;
     public static final int EDIT_VEHICLE_REQUEST = 2;
     private VehicleViewModel vehicleViewModel;
+    private final String TAG = "** ** VehicleFragment: ";
 
     @Nullable
     @Override

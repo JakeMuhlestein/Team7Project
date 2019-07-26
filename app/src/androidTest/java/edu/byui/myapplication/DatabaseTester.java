@@ -24,12 +24,17 @@ import edu.byui.myapplication.model.Budget;
 import edu.byui.myapplication.model.BudgetDao;
 import edu.byui.myapplication.model.PayMethod;
 import edu.byui.myapplication.model.PayMethodDao;
+import edu.byui.myapplication.model.ReportView;
 import edu.byui.myapplication.model.TeamDatabase;
+import edu.byui.myapplication.model.Transaction;
+import edu.byui.myapplication.model.TransactionDao;
 import edu.byui.myapplication.model.User;
 import edu.byui.myapplication.model.UserDao;
 import edu.byui.myapplication.DataRepository;
 import edu.byui.myapplication.model.Vehicle;
 import edu.byui.myapplication.model.VehicleDao;
+import edu.byui.myapplication.model.Vendor;
+import edu.byui.myapplication.model.VendorDao;
 
 @RunWith(AndroidJUnit4.class)
 public class DatabaseTester {
@@ -37,6 +42,8 @@ public class DatabaseTester {
     private BudgetDao budgetDao;
     private VehicleDao vehicleDao;
     private PayMethodDao payMethodDao;
+    private TransactionDao transactionDao;
+    private VendorDao vendorDao;
     private TeamDatabase db;
     private final String TAG = "DatabaseTester";
 
@@ -48,7 +55,8 @@ public class DatabaseTester {
         budgetDao = db.getBudgetDao();
         vehicleDao = db.getVehicleDao();
         payMethodDao = db.getPayMethodDao();
-
+        transactionDao = db.getTransactionDao();
+        vendorDao = db.getVendorDao();
     }
 
     @After
@@ -64,7 +72,7 @@ public class DatabaseTester {
         db = Room.inMemoryDatabaseBuilder(context, TeamDatabase.class).build();
         vehicleDao = db.getVehicleDao();
         // create an object that we want to save in the database.
-        Vehicle vehicle = new Vehicle("Ford", "Mustang", new Date(System.currentTimeMillis()), 32333);
+        Vehicle vehicle = new Vehicle("Ford", "Mustang", 2014, 32333);
         vehicleDao.insertVehicle(vehicle);
         LiveData<List<Vehicle>> vehicles = vehicleDao.getAllVehicles();
         if(vehicles.getValue() != null) {
@@ -80,8 +88,8 @@ public class DatabaseTester {
     @Test
     public void writeUserAndReadInList() throws Exception {
 //        User user = TestUtil.createUser(3);
-        User user = new User("ILikeDisco", "IlikeDisco4Realz",
-                "ilikedisco@4realz.edu", "801-555-DISCO", "555 EazeOnDownThe Road");
+        User user = new User("ILikeDisco", "IlikeDisco4Realz", "passwordsInOpenText-REALLY",
+                "ilikedisco@4realz.edu", "801-555-DISCO", "555 EazeOnDownThe Road", "BIRTHDAYTEXT");
         userDao.insert(user);
         Log.d(TAG, "user:" + user.toString());
         List<User> byName = userDao.loadUserByUsername("ILikeDisco");
@@ -158,6 +166,78 @@ public class DatabaseTester {
         }
 
         Log.d(TAG, "createCategoriesAndRetrieve: Finished createCategoriesAndRetrieve:" + anotherBudget.toString());
+
+
+    }
+
+    @Test
+    public void getTotalInBudgetTransactions() throws Exception {
+        //need to create some transaction entries for a budget.
+        //create vendor, user, payMethod
+        Budget budget = new Budget("testBudget", 500.05);
+        budgetDao.insertCategory(budget);
+        Vendor vendor = new Vendor("TestVendor");
+        vendorDao.insert(vendor);
+        User user = new User("1LikeDisco", "1likeDisco1Realz", "passwordsInOpenText-REALLY",
+                "1likedisco@4realz.edu", "101-155-DISCO1", "111 EazeOnDownThe Road", "BIRTHDAYTEXT1DontMakeSense");
+        userDao.insert(user);
+        PayMethod payMethod = new PayMethod("Visa Miles", "55577t7", 3500.00, 6200);
+        payMethod.setRewardsType(PayMethod.RewardsType.MILES);
+        payMethodDao.insertPayMethod(payMethod);
+
+        double testAmount = 0.00;
+
+
+        for (int i = 0; i < 6; i++) {
+            Transaction transaction = new Transaction(1, new java.sql.Date(System.currentTimeMillis()),
+                    1, 1, 1, 5.00 + Double.valueOf(i), "Trans. Total test #" + i);
+            transactionDao.createTransaction(transaction);
+            testAmount += transaction.getAmount();
+        }
+
+        double doubleAmount = transactionDao.getTotalInBudget(1);
+        Log.d(TAG, "transaction amount: $" + doubleAmount + " ;  test amount: $" + testAmount);
+        assert(doubleAmount == testAmount);
+
+        // now create a different budget and put a bunch of transactions on that budget.
+        budgetDao.insertCategory(new Budget("anotherTestBudget", 200.02));
+
+        for (int i = 0; i < 5; i++) {
+            Transaction transaction = new Transaction(1, new java.sql.Date(System.currentTimeMillis()),
+                    1, 1, 2, 2.00 + Double.valueOf(i), "Trans. Total test2 #" + i);
+            transactionDao.createTransaction(transaction);
+            testAmount += transaction.getAmount();
+}
+
+        double doubleAmount2 = transactionDao.getTotalInBudget(1);
+
+        Log.d(TAG, "2nd transaction amount: $" + doubleAmount2 + " ;  test amount: $" + testAmount);
+        assert(doubleAmount == doubleAmount2);
+        assert(doubleAmount != testAmount);
+
+        // now let's get a budget from id, get it's amount, and display the difference between the two.
+        budget = null;
+        budget = budgetDao.getCategoryById(1).get(0);
+        double doubleAmount3 = transactionDao.getTotalInBudget(budget.getId());
+
+        Log.d(TAG, "getTotalInBudgetTransactions: budget amount is:" + budget.getAmount() +
+                "; transactions total: $" + doubleAmount3);
+
+        assert(doubleAmount3 > 2.00);
+
+        //  ReportView test
+        ReportView reportView = null;
+
+        try {
+            reportView = transactionDao.getReports().getValue().get(0);
+        } catch (Exception e) {
+            Log.d(TAG, "ReportView test: Exception:" + e);
+        }
+        if(reportView!=null)
+            Log.d(TAG, "ReportView test: reportview:" + reportView.toString());
+        else
+            fail();
+
 
 
     }

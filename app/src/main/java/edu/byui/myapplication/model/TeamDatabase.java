@@ -11,6 +11,7 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import java.sql.Date;
@@ -26,7 +27,8 @@ import java.util.List;
  * class below
  *
  */
-@Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class, Vendor.class, Vehicle.class}, version = 5)
+@Database(entities = {Budget.class, PayMethod.class, Report.class, Transaction.class, User.class,
+        Vendor.class, Vehicle.class}, views = {ReportView.class}, version = 9)
 @TypeConverters({DateTypeConverter.class})
 public abstract class TeamDatabase extends RoomDatabase {
     final static String TAG = "TeamDatabase: ";
@@ -45,6 +47,7 @@ public abstract class TeamDatabase extends RoomDatabase {
 
     // for synchronization of database creation
     private static final Object sLock = new Object();
+    //private static final Migration[] ALL_MIGRATIONS = new Migration[]{ TeamDatabase.MIGRATION_6_8, TeamDatabase.MIGRATION_8_9  };
 
 
 /**
@@ -72,6 +75,26 @@ public abstract class TeamDatabase extends RoomDatabase {
  *
  */
 
+  static final Migration MIGRATION_6_8 = new Migration(6, 8) {
+      @Override
+      public void migrate(SupportSQLiteDatabase database) {
+         database.execSQL("DROP VIEW `ReportView`;");
+         database.execSQL("CREATE VIEW `ReportView` AS SELECT budget_id, name, budget.amount, " +
+                 "SUM(`Transaction`.amount) as budgetSpent FROM `Transaction` " +
+                 "INNER JOIN budget ON budget.id = `Transaction`.budget_id GROUP BY budget_id;");
+                    }
+  };
+
+    static final Migration MIGRATION_8_9 = new Migration(8, 9) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+            database.execSQL("DROP VIEW `ReportView`;");
+            database.execSQL("CREATE VIEW `ReportView` AS SELECT budget_id as budgetId, name, budget.amount, " +
+                    "SUM(`Transaction`.amount) as budgetSpent FROM `Transaction` " +
+                    "INNER JOIN budget ON budget.id = `Transaction`.budget_id GROUP BY budget_id;");
+        }
+    };
+
     /**
      * Returns an instance of the database managed by room.
      * @param context application context
@@ -84,8 +107,10 @@ public abstract class TeamDatabase extends RoomDatabase {
             if (INSTANCE == null) {
                 INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                         TeamDatabase.class, "Team.db")
-                        .fallbackToDestructiveMigration()   // This deletes all the data when the database changes.
-                        .allowMainThreadQueries()
+                        //.addMigrations(ALL_MIGRATIONS)
+                        .addMigrations(MIGRATION_8_9, MIGRATION_6_8)
+                        //.fallbackToDestructiveMigration()   // This deletes all the data when the database changes.
+                        .allowMainThreadQueries() // ?? Govert? come on, man!
                         //.addCallback(roomCallback)
                         .build();
             }

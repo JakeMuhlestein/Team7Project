@@ -7,5 +7,7 @@
     <color name="colorRed">#ff2026</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorAmber">#FFC400</color>
+    <color name="colorPrimaryMedium">#5b7daa</color>
+
     
 </resources>

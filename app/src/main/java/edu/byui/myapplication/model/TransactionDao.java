@@ -38,5 +38,15 @@ public interface TransactionDao {
     @Query("SELECT * FROM Vendor WHERE id = :vendorId")
     List<Vendor> getVendorName(int vendorId);
 
+    /**
+     * For reports. Gets the total spent on a budget
+     *
+     */
+    @Query("SELECT SUM(amount) from 'Transaction' where budget_id = :budgetId")
+    public double getTotalInBudget(int budgetId);
+
+    //for reports:
+    @Query("SELECT * FROM ReportView")
+    public LiveData<List<ReportView>> getReports();
 
 }
